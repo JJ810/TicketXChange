@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @if(ViewBag.Page == "Home")
+    {
+         <header id="masthead" class="site-header fix-header header-1">
+            <div class="top-header top-header-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="top-left">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-phone"></i>
+                                        +62274 889767
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:helloMyTicket.com">
+                                        <i class="fa fa-envelope-o"></i>
+                                        helloMyTicket.com
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="top-right">
+                            <ul>
+                                <li><a data-toggle="modal" data-target="#login-modal">Login | Signup</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="site-branding col-md-3">
+                            <h1 class="site-title">@Html.ActionLink("TicketsXchange", "Index", "Home")</h1>
+                        </div>
+
+                        <div class="col-md-9">
+                            <nav id="site-navigation" class="navbar">
+                                <div class="navbar-header">
+                                    <div class="mobile-cart"><a href="#">0</a></div>
+                                    <button type="button" class="navbar-toggle offcanvas-toggle pull-right" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div class="navbar-offcanvas navbar-offcanvas-touch navbar-offcanvas-right" id="js-bootstrap-offcanvas">
+                                    <button type="button" class="offcanvas-toggle closecanvas" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas">
+                                        <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="nav navbar-nav navbar-right">
+
+                                        <li><a data-toggle="modal" data-target="#contactus-modal">Contact Us</a></li>
+                                        <li>@Html.ActionLink("About", "Index", "About")</li>
+                                        <li>@Html.ActionLink("Sell", "Index", "Sell")</li>
+                                        <li>@Html.ActionLink("Buy", "Index", "Search")</li>
+
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    }else{
+        <header id="masthead" class="site-header">
+            <div class="top-header top-header-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="top-left">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-phone"></i>
+                                        +62274 889767
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:helloMyTicket.com">
+                                        <i class="fa fa-envelope-o"></i>
+                                        helloMyTicket.com
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="top-right">
+                            <ul>
+                                <li><a data-toggle="modal" data-target="#login-modal">Login | Signup</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header main-header-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="site-branding col-md-3">
+                            <h1 class="site-title">@Html.ActionLink("TicketsXchange", "Index", "Home")</h1>
+                        </div>
+
+                        <div class="col-md-9">
+                            <nav id="site-navigation" class="navbar">
+                                <div class="navbar-header">
+                                    <div class="mobile-cart"><a href="#">0</a></div>
+                                    <button type="button" class="navbar-toggle offcanvas-toggle pull-right" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div class="navbar-offcanvas navbar-offcanvas-touch navbar-offcanvas-right" id="js-bootstrap-offcanvas">
+                                    <button type="button" class="offcanvas-toggle closecanvas" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas">
+                                        <i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="nav navbar-nav navbar-right">
+
+                                        <li><a data-toggle="modal" data-target="#contactus-modal">Contact Us</a></li>
+                                        <li>@Html.ActionLink("About", "Index", "About")</li>
+                                        <li>@Html.ActionLink("Sell", "Index", "Sell")</li>
+                                        <li>@Html.ActionLink("Buy", "Index", "Search")</li>
+
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+    }
+                
+
+    @RenderBody()
+
+    <footer id="colophon" class="site-footer">
+        <div class="top-footer">
+            <div class="container">
+                <div class="row text-center">
+                    <h3>&copy; 2019 TicketsXchange. ALL RIGHTS RESEVED</h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;z-index:99999999;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" align="center">                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+
+                    <!-- Begin # Login Form -->
+                    <form id="login-form">
+                        <div class="modal-body">
+                            <h3>Sign In. Get Going.</h3><br/>
+                            <span>Email Address</span>
+                            <input id="login_username" class="form-control" type="text"  required>
+                            <span>Password</span>
+                            <input id="login_password" class="form-control" type="password"  required>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                            </div>
+                            <div class="text-center font17 login-lost-password">
+                                <a id="login_lost_btn">Lost Password?</a>
+                            </div>
+                            <div class="text-center font17 login-register">
+                                New to TicketsXchange? <a id="login_register_btn">Register</a>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End # Login Form -->
+                    <!-- Begin | Lost Password Form -->
+                    <form id="lost-form" style="display:none;">
+                        <div class="modal-body">
+                            <h3>Reset Password</h3> <br/>
+                            <span>Email Address</span>
+                            <input id="lost_email" class="form-control" type="text" required>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                            </div>
+                            <div class="text-center font16 login-register">
+                                <a id="lost_login_btn">Log In</a>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End | Lost Password Form -->
+                    <!-- Begin | Register Form -->
+                    <form id="register-form" style="display:none;">
+                        <div class="modal-body">
+                            <h3>Sign Up. Get Access.</h3><br />
+                            <span>First Name</span>
+                            <input id="register_firstname" class="form-control" type="text" required>
+                            <span>Last Name</span>
+                            <input id="register_lastname" class="form-control" type="text" required>
+                            <span>Email Address</span>
+                            <input id="register_email" class="form-control" type="email" required>
+                            <span>Password</span>
+                            <input id="register_password" class="form-control" type="password" required>
+                            <span>Confirm Password</span>
+                            <input id="register_confirmpassword" class="form-control" type="password" required>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" id="register_button" class="btn btn-primary btn-lg btn-block">Register</button>
+                            </div>
+                            <div class="login-register text-center font15">
+                                Already have a TicketsXchange account?&nbsp;<a id="register_login_btn">Sign in</a>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End | Register Form -->
+
+                </div>
+                <!-- End # DIV Form -->
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="contactus-modal" tabindex="-1" role="dialog" aria-labelledby="contactusModalLabel" aria-hidden="true" style="display: none;z-index:99999999;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <form id="contactus-form">
+                    <div class="modal-body">
+                        <h3>Contact Us</h3><br />
+                        <h6>Name</h6>
+                        <input id="contactus_name" class="form-control" type="text" required>
+                        <h6>Email Address</h6>
+                        <input id="contactus_email" class="form-control" type="text" required>
+                        <h6>Subject</h6>
+                        <input id="contactus_subject" class="form-control" type="text" required>
+                        <h6>Your Messages</h6>
+                        <textarea id="contact_message" class="form-control" type="text" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                        </div>
+                        
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/Content/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "PageNotFound";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section-page-content error-404">
+    <div class="container">
+        <div class="row">
+            <div id="primary" class="col-sm-12 col-md-12">
+                <div class="section-404">
+                    <div class="col-sm-offset-5 col-sm-7 col-md-offset-6 col-md-6">
+                        <h2>404</h2>
+                        <p>Ooops! Sorry, we could <br> not find the page</p>
+                        @Html.ActionLink("Back to homepage", "Index", "Home", new { area=""}, new { @class="secondary-link" });
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

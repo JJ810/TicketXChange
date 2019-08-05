@@ -1,0 +1,1062 @@
+/*--------------------------------------------------------------
+  Media Queries
+--------------------------------------------------------------*/
+
+/* width 1200px up */
+@media screen and (min-width: 75em) {
+	
+}
+
+/* 992px and 1200px */
+@media only screen and (min-width: 62px) and (max-width: 75em) {
+	
+	#site-navigation .nav li a {
+		font-size: 14px;
+		padding:14px 10px;
+	}
+	
+	#site-navigation .cart {
+		margin: 0 0 0 10px;
+	}
+	
+	.hero-1 .hero-content .hero-search input[type="text"]{
+		width:100%;
+	}
+	
+	.section-todays-schedule .section-content ul li.event-4,
+	.section-todays-schedule .section-content ul li.event-3:after{
+		display:none
+	}
+	
+	.section-upcoming-events .section-content .info,
+	.section-calendar-events .section-content .tab-content .info{
+		padding:20px;
+	}
+	
+	.section-upcoming-events .section-content .info p,
+	.section-calendar-events .section-content .tab-content .info p{
+		width:100%;
+		margin:0 0 5px;
+	}
+	
+	.section-upcoming-events .section-content .info .get-ticket,
+	.section-calendar-events .section-content .tab-content .info .get-ticket{
+		float:none;
+		width:auto;
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-name img{
+		width:31%;
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-name strong{
+		margin:0;
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-name{
+		width:100%;
+		float:none;
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-btn{
+		text-align:left;
+		margin:0;
+	}
+	
+	.section-video-parallax .section-content,
+	.section-newsletter .section-content{
+		width:100%;
+	}
+	
+	.section-artist-content .artist-event-item .artist-event-item-price a,
+	.section-search-content .search-result-item .search-result-item-price a,
+	.section-search-content .search-result-item.sold-out .search-result-item-price a{
+		padding:18px 10px
+	}
+	
+	.section-artist-content .related-artist .related-artist-img img{
+		height:auto;
+	}
+	
+	.section-artist-content .related-artist .related-artist-list .related-artist-item{
+		text-align:center;
+	}
+	
+	.section-artist-content .artist-details .artist-details-title{
+		text-align:center
+	}
+	
+	.section-artist-content .artist-details .artist-details-title h3{
+		float:none;
+		display:block;
+	}
+	
+	.section-artist-content .related-artist .related-artist-list .related-artist-img{
+		margin:0 0 10px;
+	}
+	
+	.section-artist-content .artist-details .artist-details-title a{
+		float:none;
+		margin:10px 0 0;
+	}
+	
+	.section-search-content .search-result-header .bootstrap-select .btn-default{
+		padding:0 15px;
+	}
+	
+	.section-search-content .search-result-item .search-result-item-info ul li{
+		line-height:normal;
+	}
+	
+	.section-order-review-pricing .coupon-title{
+		margin:0 0 10px
+	}
+	
+	.section-choose-how-many-tickets .ticket-nav li{
+		margin:0 10px 20px;
+	}
+	
+	.section-select-payment-method{
+		width:65%;
+	}
+	
+	.ticket-price .table > tbody > tr > td {
+		padding: 30px 15px;
+	}
+	
+	.seat-info{
+		width:90%;
+	}
+	
+	.section-calendar-events .container,
+	.section-full-events-schedule .container{
+		width:90%;
+		margin:0 auto;
+	}
+
+}
+
+/* width: 991px; */
+@media screen and (max-width: 61.938em) {
+	
+	body{
+		overflow-x:hidden;
+	}
+	
+	.site-title > a{
+		position:relative;
+		z-index:999;
+	}
+	
+	.mobile-cart{
+		display:block;
+	}
+	
+	.navbar-offcanvas{
+		bottom:0;
+	}
+	
+	.closecanvas{
+		display:block!important;
+		background:none;
+		border:none;
+		color:#fff;
+		margin:20px 0 0;
+	}
+	
+	#site-navigation .navbar-right{
+		float:none!important;
+		margin:0!important
+	}
+	
+	#site-navigation .navbar-toggle{
+		background:rgba(247,249,252, 0.7);
+		border:2px solid #f7f9fc;
+		margin:6px 0;
+	}
+	
+	#site-navigation .navbar-toggle .icon-bar{
+		background:#fff;
+		transform:none!important;
+		opacity:1!important;
+	}
+	
+	#site-navigation .cart{
+		display:none;
+	}
+	
+	#site-navigation .nav li a {
+		font-size: 14px;
+		padding: 10px 15px;
+		text-align:right
+	}
+	
+	.navbar-offcanvas{
+		background:#242424;
+		overflow:hidden;
+	}
+	
+	.navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+	
+	.hero-1 .hero-content{
+		width:75%;
+		top:35%
+	}
+	
+	.hero-1 .hero-content .hero-search input[type="text"]{
+		width:80%
+	}
+	
+	.section-todays-schedule .section-content .event-list-label{
+		display:none;
+	}
+	
+	.section-upcoming-events .section-content .info .get-ticket,
+	.section-calendar-events .section-content .tab-content .info .get-ticket{
+		font-size:10px;
+		padding:5px 10px
+	}
+	
+	.section-upcoming-events .section-content .info p,
+	.section-calendar-events .section-content .tab-content .info p {
+		font-size:12px;
+	}
+	
+	.section-upcoming-events .section-content .date .day,
+	.section-calendar-events .section-content .tab-content .date .day{
+		font-size:20px;
+	}
+	
+	.section-upcoming-events .section-content .date,
+	.section-calendar-events .section-content .tab-content .date{
+		padding:10px;
+	}
+	
+	.section-call-to-action .section-content{
+		text-align:center
+	}
+	
+	.section-call-to-action .section-content .col-sm-12{
+		margin:0 0 20px;
+	}
+	
+	.section-call-to-action .section-content .action-btn{
+		display:inline-block
+	}
+	
+	.section-latest .latest-news{
+		margin: 0 0 70px -15px
+	}
+	
+	.section-latest .latest-tweets{
+		margin: 0 0 0 -15px;
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-name {
+		float: left!important;
+		width: 70%!important; 
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-btn {
+		text-align: right!important;
+	}
+	
+	.section-artist-content .artist-event-footer{
+		margin:30px 0 35px;
+	}
+	
+	.section-artist-content .artist-details img{
+		width:100%;
+	}
+	
+	.section-artist-content .related-artist .related-artist-list .related-artist-img a{
+		display:inline-block;
+	}
+	
+	.section-artist-content .related-artist .related-artist-list .related-artist-item{
+		width:49%;
+		display:inline-block;
+		vertical-align:top;
+	}
+	
+	.section-refine-search .location,
+	.section-refine-search .keyword,
+	.section-refine-search .month{
+		margin:0 0 30px
+	}
+	
+	.section-calendar-events .container,
+	.section-full-events-schedule .container{
+		width:90%;
+		margin:0 auto;
+	}
+	
+	.section-search-content .search-filter{
+		margin:0 0 35px;
+	}
+	
+	.section-event-single-header h1{
+		float:none;
+		display:block;
+		text-align:center;
+		margin:0 0 20px;
+	}
+	
+	.section-event-single-header .ticket-purchase{
+		float:none;
+		text-align:center;
+		width:auto;
+		margin:0 auto;
+	}
+	
+	.section-event-single-content .event-info .event-info-img{
+		margin:0 0 35px;
+	}
+	
+	.section-full-events-schedule .section-content .full-event-info-header{
+		text-align:center
+	}
+		
+	.section-full-events-schedule .section-content .tab-pane .full-event-info h2,
+	.section-full-events-schedule .section-content .tab-pane .full-event-info .event-date-info,
+	.section-full-events-schedule .section-content .tab-pane .full-event-info .event-venue-info{
+		float:none;
+		display:block;
+		text-align:center;
+		margin:0 0 15px;
+	}
+	
+	.section-full-events-schedule .section-content .tab-pane .full-event-info .ticket-left-info{
+		display:inline-block;
+		float:none;
+		text-align:center;
+		margin:0 0 15px;
+	}
+	
+	.section-order-details-event-title{
+		padding:0;
+		margin:0 0 35px;
+	}
+	
+	.section-order-details-event-title img{
+		width:100%;
+	}
+	
+	.section-order-review-pricing{
+		padding:0;
+	}
+	
+	.alert-info{
+		margin:0 0 35px;
+	}
+	
+	.section-select-payment-method{
+		width:100%;
+	}
+	
+	.seat-info{
+		margin:0 auto 35px;
+	}
+	
+	.section-page-content.error-404{
+		background-position:65% bottom!important;
+	}
+	
+	.top-footer{
+		text-align:center
+	}
+	
+	.footer-1,
+	.footer-2{
+		display:block;
+		text-align:center;
+		border:none;
+		padding:0 15px;
+		min-height:auto;
+	}
+	
+	.footer-1 > div > h3{
+		float:none;
+		display:block;
+		margin:0 0 10px!important;
+	}
+	
+	.footer-1 > div > ul{
+		float:none;
+		display:block;
+		vertical-align:middle;
+	}
+	
+	.footer-1 > div > ul > li,
+	.footer-2 > div > ul > li{
+		display:inline-block;
+		float:none;
+		line-height:0;
+		margin-bottom:5px;
+	}
+	
+	.footer-2 > div > ul > li {
+		border-right: 1px solid #ccc;
+		line-height: 13px;
+	}
+	
+	.footer-2 > div > ul > li:last-child{
+		border:none;
+	}
+	
+	.footer-1 > div > ul > li > a,
+	.footer-2 > div > ul > li > a{
+		padding: 0 5px;
+		display:inline-block;
+		margin-left: -4px;
+	}
+	
+	.section-gallery .gallery-list{
+		padding:70px 15px 40px
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-name img{
+		width:auto;
+	}
+	
+	.section-upcoming-events .section-header p{
+		width:68%;
+	}
+	
+	.hero-2 .hero-content,
+	.hero-3 .hero-content{
+		width:85%;
+	}
+	
+	.main-header .col-md-9{
+		margin:-47px 0 0;
+	}
+	
+}
+
+/* width 768px */
+@media screen and (max-width: 48em) {
+	
+	.hero-1 .hero-content{
+		width:85%;
+	}
+	
+	.hero-3 .hero-content{
+		top:25%;
+	}
+	
+	.section-todays-schedule .section-header .todays-date{
+		display:none
+	}
+	
+	.section-todays-schedule .section-content ul li.event-3,
+	.section-todays-schedule .section-content ul li.event-2:after{
+		display:none
+	}
+	
+	.section-upcoming-events .section-header a{
+		float:none;
+	}
+	
+	.section-upcoming-events .section-header p{
+		width:100%;
+	}
+	
+	.section-upcoming-events .section-content ul li,
+	.section-calendar-events .section-content .tab-content ul li{
+		width:100%;
+		margin:0 0 30px
+	}
+	
+	.section-upcoming-events .section-content ul li img,
+	.section-calendar-events .section-content .tab-content ul li img{
+		width:100%;
+		height:auto;
+	}
+		
+	.section-latest .latest-tweets .tweet-list ul li .col-sm-10{
+		width:85%;
+		float:left;
+	}
+	
+	.section-latest .latest-tweets .tweet-list ul li .col-sm-2{
+		width:15%;
+		float:left;
+	}
+	
+	.section-sponsors ul li{
+		text-align:center;
+		margin:0 0 30px
+	}
+	
+	.section-sponsors ul li:last-child{
+		margin:0;
+	}
+	
+	.section-newsletter .section-content .newsletter-form input[type="email"]{
+		width:80%;
+		margin:0 0 30px
+	}
+	
+	.section-upcoming-events .section-content .date, 
+	.section-calendar-events .section-content .tab-content .date{
+		padding:15px;
+	}
+	
+	.section-upcoming-events .section-content .date .day, 
+	.section-calendar-events .section-content .tab-content .date .day{
+		font-size:30px;
+	}
+	
+	.section-upcoming-events .section-content .info, 
+	.section-calendar-events .section-content .tab-content .info{
+		padding: 50px 20px 25px;	
+	}
+	
+	.section-upcoming-events .section-content .info p, 
+	.section-calendar-events .section-content .tab-content .info p{
+		font-size:16px;
+		width:auto;
+	}
+	
+	.section-upcoming-events .section-content .info .get-ticket, 
+	.section-calendar-events .section-content .tab-content .info .get-ticket{
+		font-size: 12px;
+		padding:10px 15px;
+		width:auto;
+		float:right;
+	}
+	
+	.section-event-category .section-content ul li{
+		width:50%;
+		float:left;
+	}
+	
+	.section-stats .section-content ul li{
+		margin:0 0 30px
+	}
+	
+	.section-recent-videos .section-content ul li{
+		width:50%;
+		float:left;
+	}
+	
+	.section-recent-videos .section-content .video img{
+		width:100%;
+		height:auto;
+	}
+	
+	.section-recent-videos .section-content .video-title a{
+		min-height:110px;
+		margin:0 0 30px
+	}
+	
+	.section-latest .latest-news .news-item-img{
+		margin:0 0 30px;
+	}
+	
+	.section-todays-schedule,
+	.section-recent-videos,
+	.section-latest{
+		padding:70px 15px;
+	}
+	
+	.section-upcoming-events {
+		padding: 70px 15px 35px;
+	}
+	
+	.section-event-category {
+		padding: 35px 15px 40px;
+	}
+	
+	.top-header {
+		padding: 10px 15px;
+	}
+	
+	.top-header .top-right ul li:last-child a{
+		padding:0 0 0 10px;
+	}
+	
+	.main-header .site-branding{
+		padding:0 15px;
+	}
+	
+	.section-artist-featured-header,
+	.section-featured-header.all-sports-events,
+	.section-event-single-featured-header,
+	.section-featured-header.order-tickets-without-seat,
+	.section-select-seat-featured-header,
+	.section-select-seat-2-featured-header{
+		min-height:auto;
+	}
+	
+	.section-artist-featured-header .section-content,
+	.section-featured-header.all-sports-events .section-content,
+	.section-event-single-featured-header .section-content{
+		padding:100px 0;
+	}
+	
+	.section-gallery .gallery-list{
+		padding:30px 15px;
+	}
+	
+	.section-gallery .gallery-list .gallery-img img{
+		width:100%;
+		height:auto;
+	}
+	
+	.section-page-content.error-404{
+		background-position:right bottom!important;
+	}
+	
+	.section-event-single-content .event-features ul li{
+		padding:0 15px;
+		margin:0 0 15px;
+	}
+	
+	.section-artist-content .artist-event-item .artist-event-item-info ul li,
+	.section-search-content .search-result-item .search-result-item-info ul li{
+		margin:0 0 20px
+	}
+	
+	.section-artist-content .artist-event-item .artist-event-item-info ul li span.location{
+		margin:5px 0 0;
+	}
+	
+	.section-search-content .search-result-item .search-result-item-info ul li span{
+		margin:0 0 5px;
+	}
+	
+	.section-artist-content .artist-event-item .artist-event-item-price a,
+	.section-artist-content .artist-event-item.sold-out .artist-event-item-price a,
+	.section-search-content .search-result-item .search-result-item-price a,
+	.section-search-content .search-result-item.sold-out .search-result-item-price a{
+		display:inline-block;
+		padding:18px;
+	}
+	
+	.section-artist-content .artist-event-item .artist-event-item-price,
+	.section-search-content .search-result-item .search-result-item-price{
+		text-align:center
+	}
+	
+	.section-download-ticket p{
+		line-height:normal
+	}
+	
+	.section-download-ticket .primary-link{
+		width:270px;
+	}
+	
+	.section-search-content .search-result-header .row > div{
+		margin:0 0 20px;
+	}
+	
+	.section-event-single-header h1{
+		line-height:normal
+	}
+	
+	.section-refine-search{
+		padding:35px 15px;
+	}
+	
+	.section-calendar-events .container,
+	.section-full-events-schedule .container{
+		width:85%;
+		margin:0 auto;
+	}
+	
+	.section-full-events-schedule .section-content .tab-pane .nav{
+		margin:-6px 0 0;
+	}
+	
+	.section-full-events-schedule .section-content .tab-pane .full-event-info .event-date-info{
+		line-height:normal;
+	}
+	
+	.section-gallery{
+		padding:70px 15px;
+	}
+	
+	.gallery-lightbox{
+		width:280px;
+	}
+	
+	.gallery-lightbox-content{
+		padding:20px;
+	}
+	
+	.section-order-details-event-info .venue-details-info .section-order-review-event-img{
+		margin:0 0 20px
+	}
+	
+	.section-select-payment-method .cvv i{
+		bottom:6px;
+	}
+	
+	.section-select-payment-method .tab-content .bootstrap-select{
+		margin:0 0 20px
+	}
+	
+	.section-select-payment-method .tab-content #credit-card{
+		padding:30px;
+	}
+	
+	.hero-2 .count-down li{
+		font-size:20px;
+		font-family: "Montserrat-Regular";
+		display:inline-block;
+		padding:15px 0;
+		text-align:center;
+		border:1px solid #fff;
+		border-radius:5px;
+		margin:0 5px 15px;
+		color:#fff;
+		width:70px;
+	}
+
+	.hero-2 .count-down li span{
+		display:block;
+		font-size:15px;
+		font-family: "Montserrat-Light";
+		margin:5px 0 0;
+	}
+	
+	.section-event-category .section-content ul li a{
+		font-size:20px
+	}
+	
+	.section-event-category .section-content ul li img{
+		width:100%;
+		height:auto;
+	}
+	
+	.wrapper-image{
+		overflow-x:auto
+	}
+	
+}
+
+/* width 480px */
+@media screen and (max-width: 30em) {
+	
+	.section-upcoming-events .section-content .info p{
+		width:100%;
+	}
+	
+	.section-upcoming-events .section-content .info .get-ticket{
+		float:none;
+	}
+	
+	.section-calendar-events .section-content .tab-content .date .day{
+		font-size:20px;
+	}
+	
+	.section-calendar-events .section-content .tab-content .date{
+		padding:10px;
+	}
+	
+	.section-calendar-events .section-content .tab-content .info .get-ticket{
+		font-size: 10px;
+		padding: 5px 10px;
+		float:none;
+	}
+	
+	.section-calendar-events .section-content .tab-content .info p{
+		font-size:12px;
+		width:100%;
+	}
+	
+	.hero-3 .hero-content .hero-title{
+		font-size:40px;
+		line-height:30px;
+	}
+	
+	.hero-3 .hero-content .hero-caption{
+		font-size:30px;
+		line-height:30px;
+	}
+	
+	.hero-2 .hero-content .hero-title{
+		font-size:65px;
+		line-height:65px;
+	}
+	
+	.hero-2 .hero-purchase-ticket a,
+	.hero-3 .hero-purchase-ticket a{
+		font-size:16px;
+		padding:20px 30px;
+	}
+	
+	.hero-2 .count-down{
+		margin:0 0 20px
+	}
+	
+	.hero-2 .count-down li{
+		font-size:16px;
+		font-family: "Montserrat-Regular";
+		display:inline-block;
+		padding:10px 0;
+		text-align:center;
+		border:1px solid #fff;
+		border-radius:5px;
+		margin:0 5px 15px;
+		color:#fff;
+		width:50px;
+	}
+
+	.hero-2 .count-down li span{
+		display:block;
+		font-size:10px;
+		font-family: "Montserrat-Light";
+		margin:5px 0 0;
+	}
+	
+	.hero-1 .hero-content{
+		width:100%;
+		padding:15px;
+		top:25%;
+	}
+	
+	.section-todays-schedule .section-content ul li.event-2,
+	.section-todays-schedule .section-content ul li.event-1::after {
+		display: none;
+	}
+	
+	.section-event-category .section-content ul li,
+	.section-recent-videos .section-content ul li	{
+		float: none;
+		width: 100%;
+	}
+	
+	.section-call-to-action .section-content{
+		padding:50px 15px
+	}
+	
+	.section-latest .latest-tweets .twitter-header .twitter-name{
+		width:100%!important;
+		float:none!important;
+	}
+	
+	.hero-1 .hero-content .hero-search input[type="text"],
+	.section-newsletter .section-content .newsletter-form input[type="email"],
+	.section-newsletter .section-content .newsletter-form input[type="submit"]{
+		width:100%;
+	}
+
+	.section-latest .latest-tweets .twitter-header .twitter-btn{
+		text-align:left!important;
+	}
+	
+	.section-latest .latest-tweets .tweet-list ul li .col-sm-10,
+	.section-latest .latest-tweets .tweet-list ul li .col-sm-2 {
+		float: none;
+		width: 100%;
+	}
+	
+	.section-latest .latest-tweets .tweet-list span{
+		text-align:left;
+		margin:10px 0 0;
+	}
+	
+	.section-full-events-schedule .section-content .tab-pane .nav a{
+		padding:30px 50px;
+	}
+	
+	.section-full-events-schedule .section-content .tab-pane .nav a:before{
+		left:15px;
+	}
+	
+	.section-calendar-events .container,
+	.section-full-events-schedule .container{
+		width:80%;
+	}
+	
+	.section-full-events-schedule .section-content .tab-pane .full-event-info{
+		padding:30px
+	}
+	
+	.section-artist-featured-header .section-content,
+	.section-featured-header.all-sports-events .section-content,
+	.section-event-single-featured-header .section-content,
+	.section-featured-header.order-tickets-without-seat .section-content,
+	.section-select-seat-featured-header .section-content,
+	.section-select-seat-2-featured-header .section-content{
+		padding:50px 0;
+	}
+	
+	.section-artist-featured-header .section-content h1,
+	.section-featured-header.all-sports-events .section-content h1,
+	.section-event-single-featured-header .section-content h1{
+		font-size:30px;
+	}
+	
+	.section-featured-header.order-tickets-without-seat .section-content p strong,
+	.section-select-seat-featured-header .section-content p strong,
+	.section-select-seat-featured-header .section-content p strong span,
+	.section-select-seat-2-featured-header .section-content p strong{
+		font-size:30px;
+		line-height:normal;
+	}
+	
+	.section-select-seat-featured-header .section-content p span{
+		line-height:normal;
+	}
+	
+	.section-artist-page-header .entry-title,
+	.section-page-header .entry-title{
+		font-size:20px;
+	}
+	
+	.section-artist-content,
+	.section-page-content,
+	.section-search-content{
+		padding:30px 0;
+	}
+	
+	.section-artist-page-header,
+	.section-page-header{
+		padding:20px;
+	}
+	
+	.section-select-payment-method .nav-tabs li{
+		margin:0 15px 15px;
+	}
+	
+	.section-select-payment-method-action .col-xs-6{
+		width:100%;
+		float:none;
+	}
+	
+	.section-select-payment-method-action .secondary-link{
+		margin:0 0 20px;
+	}
+	
+	.section-gallery .gallery-list .gallery-img{
+		width:100%;
+	}
+	
+	.section-order-review-pricing .coupon-form input[type="text"]{
+		float:none;
+		width:100%;
+		margin:0 0 20px;
+	}
+	.section-order-review-pricing .coupon-form input[type="submit"]{
+		float:none;
+		width:100%;
+	}
+	
+	.seat-label ul li {
+		display: block;
+		margin: 0 20px 20px;
+	}
+	
+	.site-title > a > img{
+		width:120px;
+		height:auto;
+		margin:0 0 8px
+	}
+	
+	.top-header ul li{
+		float:none;
+		display:inline-block;
+		margin-bottom:5px!important;
+	}
+	
+	.top-header ul li a{
+		margin-right:-4px;
+	}
+	
+	.top-header .top-left,
+	.top-header .top-right{
+		float:none;
+		width:100%;
+		display:block;
+		text-align:center;
+	}
+
+	.top-header .top-right{
+		display: none;
+	}
+		
+	.section-page-content .section-404 h2{
+		font-size: 131px;
+		line-height: 131px;
+		margin: 0 0 30px;
+	}
+	
+	.section-page-content .section-404 p{
+		font-size: 20px;
+		line-height: 25px;
+		margin: 0 0 30px;
+	}
+	
+	.section-page-content .section-404 .secondary-link{
+		font-size: 20px;
+		padding: 20px 30px;
+	}
+	
+	.section-artist-content .related-artist .related-artist-list .related-artist-item{
+		width:100%;
+	}
+	
+	.section-order-details-event-action ul li{
+		width:100%;
+		margin:0 0 20px;
+	}
+	
+	.section-event-single-content .event-features ul li,
+	.section-event-single-header .ticket-purchase li{
+		display:block;
+		margin:0 0 20px;
+	}
+	
+	.section-full-events-schedule .section-content .tab-pane .full-event-info-content .book-ticket{
+		display:block;
+		padding:20px 30px;
+		float:none;
+		text-align:center
+	}
+	
+	.footer-1 .social ul li a{
+		margin:0 10px 0 0;
+	}
+	
+	.section-recent-videos .section-content .video-title a{
+		min-height:auto;
+	}
+	
+}

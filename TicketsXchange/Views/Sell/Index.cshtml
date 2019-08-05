@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section>
+    <div class="sell-container">
+
+            <h1 class="text-center">Sell your tickets</h1>
+            <form>
+                <div class="col-md-12">
+                    <h4>Category</h4>
+                    <select class="selectpicker dropdown form-control">
+                        <option>Select Category</option>
+                        <option>Sports</option>
+                        <option>Festivals </option>
+                        <option>Concerts</option>
+                        <option>Club nights</option>
+                        <option>Theater & Comedy</option>
+                        <option>Vouchers & Days out</option>
+                    </select>
+                </div>
+                <div class="keyword col-md-12">               
+                    <h4>Name</h4>
+                    <input type="text" class="form-control hasclear" placeholder="Name">
+                </div>
+                <div class="keyword col-md-12">
+                    <h4>Details</h4>
+                    <input type="text" class="form-control hasclear" placeholder="Details">
+                </div>
+                <div class="col-md-12">
+                    <h4>Date</h4>
+                    <select class="selectpicker dropdown form-control">
+                        <option>Select Date</option>
+                        <option>2019 Aug 12</option>
+                        <option>2019 Sep 1 </option>
+                    </select>
+                </div>
+                <div class="keyword col-md-12">
+                    <h4>Price</h4>
+                    <input type="text" class="form-control hasclear" placeholder="Details">
+                </div>
+                <div class="col-md-12">
+                    <h4>Payment Method</h4>
+                    <select class="selectpicker dropdown form-control" >
+                        <option>Select Payment Method</option>
+                        <option>Cash</option>
+                        <option>Credit Card </option>
+                        <option>Free</option>
+                    </select>
+                </div>
+                <div class="col-md-12" style="margin-top:15px;">
+                    <button type="submit" class="sell-add-button">Add</button>
+                </div>
+            </form>
+        
+    </div>
+
+</section>
+
