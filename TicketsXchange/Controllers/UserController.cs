@@ -8,14 +8,20 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using TicketsXchange.Models.DAL;
 using TicketsXchange.Helper;
+using System.Web.Security;
+using System.Web;
+using TicketsXchange.Models;
+using System.Net.Mail;
+using System.Web.Mvc;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace TicketsXchange.Controllers
 {
     public class UserController : ApiController
     {
-        private TxcDevEntities db = new TxcDevEntities();
+        private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
         // GET: api/User
     
@@ -72,7 +78,7 @@ namespace TicketsXchange.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
      
-        [Route("api/login")]
+        [System.Web.Http.Route("api/login")]
 
         public IHttpActionResult Login([FromBody] User request)
         {
@@ -81,16 +87,22 @@ namespace TicketsXchange.Controllers
 
             if (user == null)
             {
-                return Ok(3);
+                return Ok(-2);
             }
 
             if(PasswordHelper.verifyMd5Hash(request.Password, user.Password))
             {
-                return Ok("OK");
+                //   return RedirectToAction("Edit", "Profile", new { Id = "Admin" });
+                FormsAuthentication.SetAuthCookie(string.Format("{0}", user.Id), false);
+             
+                //       HttpContext.Current.Session["UserID"] = s;
+                int? a = SessionHelper.UserID;
+             
+                return Ok(user.Id);
             }
             else
             {
-                return Ok(2);
+                return Ok(-1);
             }
             
         }
@@ -101,17 +113,24 @@ namespace TicketsXchange.Controllers
             public string FirstName { get; set; }
             public string LastName { get; set; }
         };
-        // POST: api/User
-        [Route("api/register")]
+
+        [System.Web.Http.Route("api/register")]
         public IHttpActionResult Register([FromBody] RegisterUser request)
         {
 
-            User user = new User { Email=request.Email, Password= PasswordHelper.getMd5Hash(request.Password), CreatedAt=DateTime.Now, Verified=0};
+            if (db.Users.Where(a => a.Email == request.Email).FirstOrDefault() != null)
+            {
+                return Ok(-3);
+            }
+            string activationCode = Guid.NewGuid().ToString();
+            User user = new User { Email = request.Email, Password = PasswordHelper.getMd5Hash(request.Password), CreatedAt = DateTime.Now, Verified = 0, Role = 1, Active = 0, ActivationCode = activationCode };
+        
             
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            
             db.Users.Add(user);
             try
             {
@@ -121,11 +140,11 @@ namespace TicketsXchange.Controllers
             {
                 if (UserExists(user.Id))
                 {
-                    return Conflict();
+                    return Ok(-3);
                 }
                 else
                 {
-                    throw;
+                    return Ok(-2);
                 }
             }
             Profile profile = new Profile { FirstName = request.FirstName, LastName = request.LastName, User
@@ -134,11 +153,13 @@ namespace TicketsXchange.Controllers
             try
             {
                 db.SaveChanges();
+                EmailHelper.SendActivationMail(user.Email, user.ActivationCode);
             }
             catch (DbUpdateException)
             {
-               
+                return Ok(-1);  
             }
+            
             return Ok(1);
         }
 
@@ -170,6 +191,158 @@ namespace TicketsXchange.Controllers
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.Id == id) > 0;
+        }
+        public class AdminUser
+        {
+            public int Id { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string Email { get; set; }
+            public int Sex { get; set; }
+            public string DOB { get; set; }
+            public int Verified { get; set; }
+            public int Active { get; set; }
+            public string MobileNumber { get; set; }
+            public string PhoneNumber { get; set; }
+            public string AddressLine1 { get; set; }
+            public string AddressLine2 { get; set; }
+            public string AddressLine3 { get; set; }
+            public string PostCode { get; set; }
+            public string City { get; set; }
+            public string State { get; set; }
+            public string Country { get; set; }
+            public string CreatedAt { get; set; }
+        }
+        public IHttpActionResult Admin([FromBody] AdminUser request)
+        {
+            var query = Request.GetQueryNameValuePairs();
+            string action = "list";
+            int start = 0, page = 0;
+            foreach (var param in Request.GetQueryNameValuePairs())
+            {
+                if (param.Key == "action") action = param.Value;
+                if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
+                if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
+            }
+            List<AdminUser> list = new List<AdminUser>();
+            if (action == "list")
+            {               
+                foreach (var user in db.Users.OrderBy(a=>a.Id).Skip(start).Take(page))
+                {
+                    AdminUser item = new AdminUser();
+                    item.Id = user.Id;
+                    item.FirstName = user.Profile.FirstName;
+                    item.LastName = user.Profile.LastName;
+                    item.Email = user.Email;
+                    item.Sex = (int)user.Profile.Gender;
+                    item.DOB = user.Profile.DOB;
+                    item.Verified = (int)user.Verified;
+                    item.Active = (int)user.Active;
+                    item.MobileNumber = user.Profile.MobileNumber;
+                    item.PhoneNumber = user.Profile.PhoneNumber;
+                    item.AddressLine1 = user.Profile.AddressLine1;
+                    item.AddressLine2= user.Profile.AddressLine2;
+                    item.AddressLine3 = user.Profile.AddressLine3;
+                    item.PostCode = user.Profile.PostCode;
+                    item.City = user.Profile.City;
+                    item.State = user.Profile.State;
+                    item.Country = user.Profile.Country;
+                    item.CreatedAt = String.Format("{0:dd/MM/yyyy}", user.CreatedAt);
+                    list.Add(item);
+                }
+                Dictionary<string, Object> res = new Dictionary<string, Object>();
+                res.Add("Result", "OK");
+                res.Add("Records", list);
+                res.Add("TotalRecordCount", db.Users.Count());
+                return Json(res);
+            }else if(action == "update")
+            {
+                User user = db.Users.Find(request.Id);
+                user.Email = request.Email;
+                user.Active = request.Active;
+                user.Verified = (byte)request.Verified;
+                Profile profile = db.Profiles.Find(request.Id);
+                profile.FirstName = request.FirstName;
+                profile.LastName = request.LastName;
+                profile.DOB = request.DOB;
+                profile.Gender = (byte)request.Sex;
+                profile.MobileNumber = request.MobileNumber;
+                profile.PhoneNumber = request.PhoneNumber;
+                profile.AddressLine1 = request.AddressLine1;
+                profile.AddressLine2 = request.AddressLine2;
+                profile.AddressLine3 = request.AddressLine3;
+                profile.PostCode = request.PostCode;
+                profile.City = request.City;
+                profile.State = request.State;
+                profile.Country = request.Country;
+                db.SaveChanges();
+                Dictionary<string, Object> res = new Dictionary<string, Object>();
+                res.Add("Result", "OK");
+                return Json(res);
+            }
+            else if(action == "delete")
+            {
+                db.Users.Remove(db.Users.Find(request.Id));
+                db.SaveChanges();
+                Dictionary<string, Object> res = new Dictionary<string, Object>();
+                res.Add("Result", "OK");
+                return Json(res);
+            }
+            else if(action == "create")
+            {
+                User user = new User();
+                user.Email = request.Email;
+                user.Active = request.Active;
+                user.Verified = (byte)request.Verified;
+                user.CreatedAt = DateTime.Now;
+                db.Users.Add(user);
+                db.SaveChanges();
+                Profile profile = new Profile();
+                profile.UserId = user.Id;
+                profile.FirstName = request.FirstName;
+                profile.LastName = request.LastName;
+                profile.DOB = request.DOB;
+                profile.Gender = (byte)request.Sex;
+                profile.MobileNumber = request.MobileNumber;
+                profile.PhoneNumber = request.PhoneNumber;
+                profile.AddressLine1 = request.AddressLine1;
+                profile.AddressLine2 = request.AddressLine2;
+                profile.AddressLine3 = request.AddressLine3;
+                profile.PostCode = request.PostCode;
+                profile.City = request.City;
+                profile.State = request.State;
+                profile.Country = request.Country;
+                db.Profiles.Add(profile);
+                db.SaveChanges();
+                request.Id = user.Id;
+                Dictionary<string, Object> res = new Dictionary<string, Object>();
+                res.Add("Result", "OK");
+                res.Add("Record", request);
+                return Json(res);
+            }
+            return Json(1);
+        }
+        public class DataType
+        {
+            public string DisplayText { get; set; }
+            public int Value { get; set; }
+        }
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/UserName/GetJson")]
+        public IHttpActionResult GetJson()
+        {
+            List<DataType> list = new List<DataType>();
+            foreach (var ev in db.Users)
+            {
+                DataType data = new DataType();
+                data.DisplayText = ev.Profile.FirstName + " " + ev.Profile.LastName;
+                data.Value = ev.Id;
+                list.Add(data);
+            }
+            Dictionary<string, Object> res = new Dictionary<string, Object>();
+            res.Add("Result", "OK");
+            res.Add("Options", list);
+            return Json(res);
         }
     }
 }

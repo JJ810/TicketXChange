@@ -6,57 +6,130 @@
 
 
 <section>
-    <div class="sell-container">
+    <div class="container">
+        <div class="row">
 
-            <h1 class="text-center">Sell your tickets</h1>
-            <form>
-                <div class="col-md-12">
-                    <h4>Category</h4>
-                    <select class="selectpicker dropdown form-control">
-                        <option>Select Category</option>
-                        <option>Sports</option>
-                        <option>Festivals </option>
-                        <option>Concerts</option>
-                        <option>Club nights</option>
-                        <option>Theater & Comedy</option>
-                        <option>Vouchers & Days out</option>
-                    </select>
+            <div class="sell-container col-md-offset-2 col-md-8">
+                <h2 style="margin-bottom:30px;">Select Category.</h2>
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12 custom-search-input-row">
+                        <span class="input-group-btn position-absolute" style="position:absolute">
+                            <button>
+                                <span><i class="fa fa-search"></i></span>
+                            </button>
+                        </span>
+                        <input type="text" class="search-query form-control" id="search_event" placeholder="Search" />
+                        <div class="lds-spinner select-ticket-loading"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                    </div>
                 </div>
-                <div class="keyword col-md-12">               
-                    <h4>Name</h4>
-                    <input type="text" class="form-control hasclear" placeholder="Name">
+                <div class="select-ticket-content">
+
                 </div>
-                <div class="keyword col-md-12">
-                    <h4>Details</h4>
-                    <input type="text" class="form-control hasclear" placeholder="Details">
+                <div class="selected-ticket">
+
                 </div>
-                <div class="col-md-12">
-                    <h4>Date</h4>
-                    <select class="selectpicker dropdown form-control">
-                        <option>Select Date</option>
-                        <option>2019 Aug 12</option>
-                        <option>2019 Sep 1 </option>
-                    </select>
+                <div class="selected-ticket-info">
+                    <h3>Description</h3>
+                    <div class="selected-ticket-info-detail"></div>                   
                 </div>
-                <div class="keyword col-md-12">
-                    <h4>Price</h4>
-                    <input type="text" class="form-control hasclear" placeholder="Details">
+                <div class="col-md-offset-9 col-md-4 select-ticket-next-button-row">
+                    <a class="primary-link select-ticket-next-button">Next</a>
                 </div>
-                <div class="col-md-12">
-                    <h4>Payment Method</h4>
-                    <select class="selectpicker dropdown form-control" >
-                        <option>Select Payment Method</option>
-                        <option>Cash</option>
-                        <option>Credit Card </option>
-                        <option>Free</option>
-                    </select>
-                </div>
-                <div class="col-md-12" style="margin-top:15px;">
-                    <button type="submit" class="sell-add-button">Add</button>
-                </div>
-            </form>
-        
+            </div>
+            <div class="col-md-offset-8 col-md-4">
+                
+            </div>
+            
+        </div>
+
     </div>
-
 </section>
 
+@section scripts {
+
+    <script type="text/javascript">
+        function debounce(func, wait, immediate) {
+            var timeout;
+            return function () {
+                var context = this, args = arguments;
+                var later = function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        };
+        $(document).ready(function () {
+            $('.select-ticket-next-button').click(function (e) {
+                window.location.href = "/Sell/Photo/" + localStorage.getItem('currentItem');
+            })
+            $('#search_event').keydown(debounce((event) => {            
+                $.ajax({
+                    method: 'get',
+                    url: '/api/CategorySearch?name=' + $('#search_event').val(),
+                    beforeSend: function () {
+                        console.log('ajax start');
+                        $('.lds-spinner').show();
+                    },
+                    success: function (response) {
+                        console.log('ajax finish');                         
+                        console.log(response);
+                        let content = 'No Search Results';
+                        if (response.length > 0) {
+                            content = '<div>SUGGESTIONS</div>';
+                            for (var item of response) {
+                                content += ''
+                                content += '<div class="select-ticket-row" data-id="' + item.Id + '">\
+                                                <span class="select-ticket-close"><i class="fa fa-times"></i></span>\
+                                            <div class="select-ticket-row-title">' + item.Name + ' </div>\
+                                        <div class="select-ticket-row-info">' + item.Description + '</div>\
+                                        </div>';
+                            }
+                        } 
+                        $(".select-ticket-content").html(content);
+                        $('.select-ticket-content').hide();
+                        $('.select-ticket-content').slideDown("fast", function () { });
+                        $(".select-ticket-row").click(function (e) {                                     
+                            $('.selected-ticket').show();                         
+                            $('.selected-ticket-info').show();
+                            $('.select-ticket-next-button-row').show();
+                            $('.selected-ticket').html('');
+                            localStorage.setItem('currentItem', $(e.currentTarget).data('id'));
+
+                            $(e.currentTarget).clone().addClass('active').appendTo($('.selected-ticket'));
+
+                            $('.selected-ticket-info-detail').html($(e.currentTarget).find('.select-ticket-row-info').html());
+                            $('#custom-search-input').hide()
+                            $('.select-ticket-content').hide()
+                            $('.select-ticket-close').click(function (e) {
+                                $('#custom-search-input').show()
+                                $('.select-ticket-content').show()                          
+                                $('.selected-ticket').hide();
+                                $('.select-ticket-next-button-row').hide();
+                                $('.selected-ticket-info').hide();
+                            })
+                        })
+                            
+                          
+                        $('.lds-spinner').hide();
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                })
+                
+                event.stopPropagation();
+            }, 500))
+            
+            $("#search_event").focus(function () {
+               $('.select-ticket-content').hide();
+               $('.select-ticket-content').slideDown("fast", function () { });
+            })
+        });
+
+    </script>
+
+}

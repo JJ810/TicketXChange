@@ -1,0 +1,139 @@
+﻿@model TicketsXchange.Models.Ticket
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section-page-header">
+    <div class="container">
+        <h1 class="entry-title">Payment</h1>
+    </div>
+</section>
+<input type="hidden" id="response_status" value="@ViewBag.Status" />
+<input type="hidden" id="response_description" value="@ViewBag.Description" />
+<section class="section-page-content">
+    <div class="container">
+        <div class="row">
+            <div id="primary" class="col-sm-12 col-md-12">
+                <div class="section-select-payment-method">
+                    <form action="/Search/Pay" id="paymentForm" class="tab-content" method="post">
+                        <div id="paymentErrors"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Name on Card</label>
+                                <input data-worldpay="name" class="form-control" name="name" type="text" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label>Card Number</label>
+                                <input data-worldpay="number" class="form-control" size="20" type="text" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>CVC</label>
+                                <input data-worldpay="cvc" class="form-control" size="4" type="text" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Month</label>
+                                <input data-worldpay="exp-month" class="form-control" size="2" type="text" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Year</label>
+                                <input data-worldpay="exp-year" class="form-control" size="4" type="text" />
+                            </div>
+                        </div>
+                        <div class="row section-select-payment-method-action">
+                            <div class="col-md-6">
+                                <button class="secondary-link" onClick="javascript:history.go(-1)">Cancel</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="primary-link" type="submit">Confirm Payment</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal fade" id="payment-success-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" style="display: none;z-index:99999999;" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content text-center">
+                                <div class="modal-header" align="center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span class="fa fa-times" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <h1>Success! </h1>
+                                <hr />
+                                <span style="font-size:150px;color:limegreen;"><i class="fa fa-check-circle"></i></span>
+                                <p id="success_description"></p>
+                                <a class="primary-link" style="width:50%;margin:15px auto;" href="/">OK</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="payment-failure-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" style="display: none;z-index:99999999;" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content text-center">
+                                <div class="modal-header" align="center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span class="fa fa-times" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <h1>Failure! </h1>
+                                <hr />
+                                <span style="font-size:150px;color:darkred;"><i class="fa fa-times"></i></span>
+                                <p id="failure_description"></p>
+                                <a class="primary-link" style="width:50%;margin:15px auto;" href="/">OK</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="payment-failure-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" style="display: none;z-index:99999999;">
+                        <div class="modal-dialog">
+                            <div class="modal-content text-center">
+                                <div class="modal-header" align="center">
+                                </div>
+                                <h1>Processing... </h1>
+                                <hr />
+                                <div id="loadingDiv">
+                                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts {
+    <script src="https://cdn.worldpay.com/v1/worldpay.js"></script>
+    <script type="text/javascript">
+        var form = document.getElementById('paymentForm');
+        Worldpay.useOwnForm({
+            'clientKey': 'T_C_fe22a0f3-b8c4-4450-bae3-a6aff11f9175',
+            'form': form,
+            'reusable': false,
+            'callback': function (status, response) {
+                document.getElementById('paymentErrors').innerHTML = '';
+                if (response.error) {
+                    Worldpay.handleError(form, document.getElementById('paymentErrors'), response.error);
+                } else {
+                    var token = response.token;
+                    Worldpay.formBuilder(form, 'input', 'hidden', 'Token', token);
+                    form.submit();
+                }
+            }
+        });
+        $(document).ready(function () {
+            let status = $('#response_status').val();
+            let description = $('#response_description').val();
+            if (status == "Success") {
+                $('#success_description').html(description);
+                $('#payment-success-modal').modal();
+            } else if (status == "Failure") {
+                $('#failure_description').html(description);
+                $('#payment-success-modal').modal();
+            }
+        })
+    </script>
+}
+
+    

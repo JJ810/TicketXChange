@@ -1,0 +1,194 @@
+.app_theme_d .uk-alert {
+  background: #00acc1;
+}
+.app_theme_d .md-btn-primary,
+.app_theme_d .md-btn-primary:hover,
+.app_theme_d .md-btn-primary:focus,
+.app_theme_d .md-btn-primary:active {
+  background: #00acc1;
+  color: #fff;
+}
+.app_theme_d .md-btn-flat-primary,
+.app_theme_d .md-btn-flat-primary:hover,
+.app_theme_d .md-btn-flat-primary:focus,
+.app_theme_d .md-btn-flat-primary:active {
+  color: #00838f;
+}
+.app_theme_d .md-btn-flat-primary:hover,
+.app_theme_d .md-btn-flat-primary:focus,
+.app_theme_d .md-btn-flat-primary:active {
+  background: #c1f8ff;
+}
+.app_theme_d .uk-badge-primary {
+  background: #00acc1;
+}
+.app_theme_d .md-card-list-wrapper .md-card-list > ul > li.item-shown.md-card-list-item-selected:before {
+  background: #e0f7fa;
+}
+.app_theme_d .md-card-list-wrapper .md-card-list .md-card-list-item-selected {
+  background: #e0f7fa;
+}
+.app_theme_d .md-card-list-wrapper .md-card-list .md-card-list-item-selected.item-shown {
+  background: #fff;
+}
+.app_theme_d .md-card-list-wrapper .md-card-list .md-card-list-item-selected.item-shown:before {
+  background: #e0f7fa;
+}
+.app_theme_d .md-fab.md-fab-accent {
+  background: #673ab7;
+}
+.app_theme_d .md-list .uk-nestable-list > li.md-list-item-active,
+.app_theme_d .md-list > li.md-list-item-active {
+  color: #673ab7;
+}
+.app_theme_d .md-list-addon > li.md-list-item-active .md-list-addon-element,
+.app_theme_d .md-list-addon > li.md-list-item-active .md-list-addon-element .material-icons {
+  color: #673ab7;
+}
+.app_theme_d .uk-pagination > li > a:hover {
+  background: #ebe5f7;
+}
+.app_theme_d .uk-pagination > li.uk-active > a,
+.app_theme_d .uk-pagination > li.uk-active > span {
+  background: #673ab7;
+  color: #fff;
+}
+.app_theme_d .uk-subnav-pill > .uk-active > * {
+  background: #673ab7;
+}
+.app_theme_d .uk-tab > li > a:hover,
+.app_theme_d .uk-tab > li > a:focus {
+  border-bottom-color: #5bedff;
+}
+.app_theme_d .uk-tab > li.uk-active > a {
+  border-bottom-color: #00acc1;
+}
+.app_theme_d .uk-tab-bottom li > a:hover,
+.app_theme_d .uk-tab-bottom li > a:focus {
+  border-top-color: #5bedff;
+}
+.app_theme_d .uk-tab-bottom li.uk-active > a {
+  border-top-color: #00acc1;
+}
+.app_theme_d .uk-tab-left li > a:hover,
+.app_theme_d .uk-tab-left li > a:focus {
+  border-right-color: #5bedff;
+}
+.app_theme_d .uk-tab-left li.uk-active > a {
+  border-right-color: #00acc1;
+}
+.app_theme_d .uk-tab-right li > a:hover,
+.app_theme_d .uk-tab-right li > a:focus {
+  border-left-color: #5bedff;
+}
+.app_theme_d .uk-tab-right li.uk-active > a {
+  border-left-color: #00acc1;
+}
+.app_theme_d .uk-tab-double-header li a:hover,
+.app_theme_d .uk-tab-double-header li a:focus {
+  border-bottom-color: #00c3db;
+}
+.app_theme_d .uk-tab-double-header li.uk-active > a {
+  border-bottom-color: #673ab7;
+}
+.app_theme_d #header_main {
+  background: #00acc1;
+}
+.app_theme_d .header_double_height:after {
+  background: #00acc1;
+}
+.app_theme_d #top_bar .top_bar_nav > li > a:hover {
+  -webkit-box-shadow: inset 0 -3px 0 #00acc1;
+  box-shadow: inset 0 -3px 0 #00acc1;
+}
+.app_theme_d #top_bar .top_bar_nav > li.uk-active a {
+  -webkit-box-shadow: inset 0 -3px 0 #00acc1;
+  box-shadow: inset 0 -3px 0 #00acc1;
+}
+.app_theme_d .user_heading {
+  background: #00838f;
+}
+.app_theme_d #sidebar_main .menu_section > ul > li ul li.act_item a {
+  color: #673ab7;
+}
+.app_theme_d #sidebar_main .menu_section > ul > li.current_section > a > .menu_icon .material-icons {
+  color: #673ab7;
+}
+.app_theme_d #sidebar_main .menu_section > ul > li.current_section > a .menu_title {
+  color: #673ab7;
+}
+.app_theme_d .sidebar_mini #sidebar_main .menu_section > ul > li > a > .menu_title {
+  background: #673ab7;
+  color: #fff;
+}
+.app_theme_d .sidebar_mini #sidebar_main .menu_section > ul > li:hover.sidebar_submenu {
+  background: #673ab7;
+}
+.app_theme_d .sidebar_mini #sidebar_main .menu_section > ul > li:hover.sidebar_submenu > a .menu_icon .material-icons {
+  color: #fff;
+}
+.app_theme_d .sidebar_mini #sidebar_main .menu_section > ul > li:hover.sidebar_submenu ul {
+  border-left-color: #673ab7;
+}
+.app_theme_d .sidebar_mini #sidebar_main .menu_section > ul > li.current_section > a > .menu_icon .material-icons {
+  color: #673ab7;
+}
+.app_theme_d .clndr .clndr_days .clndr_days_grid .day.today > span {
+  background: #673ab7;
+}
+.app_theme_d .DTTT_print_info h6 {
+  color: #673ab7;
+}
+.app_theme_d .fc-unthemed .fc-button.fc-state-active:after {
+  color: #673ab7;
+}
+.app_theme_d .fc-unthemed .fc-highlight {
+  -webkit-box-shadow: inset 0 0 0 2px #00acc1, inset 0 -1px 0 2px #00acc1;
+  box-shadow: inset 0 0 0 2px #00acc1, inset 0 -1px 0 2px #00acc1;
+}
+.app_theme_d .tablesorter-altair tbody > tr.row_highlighted > td {
+  background: #e0f7fa;
+}
+.app_theme_d .tablesorter-altair .headerSortUp,
+.app_theme_d .tablesorter-altair .tablesorter-headerSortUp,
+.app_theme_d .tablesorter-altair .tablesorter-headerAsc,
+.app_theme_d .tablesorter-altair .headerSortDown,
+.app_theme_d .tablesorter-altair .tablesorter-headerSortDown,
+.app_theme_d .tablesorter-altair .tablesorter-headerDesc {
+  color: #673ab7;
+}
+.app_theme_d .wizard > .steps {
+  background: #00acc1;
+}
+.app_theme_d .wizard > .steps > ul > li.current a,
+.app_theme_d .wizard > .steps > ul > li.current a:hover,
+.app_theme_d .wizard > .steps > ul > li.current a:active {
+  background: #00d9f4;
+}
+.app_theme_d .wizard > .steps > ul > li.done a,
+.app_theme_d .wizard > .steps > ul > li.done a:hover,
+.app_theme_d .wizard > .steps > ul > li.done a:active {
+  background: #00838f;
+}
+.app_theme_d .md-card-primary {
+  border-left-color: #00acc1;
+}
+.app_theme_d .waves-effect.md-btn-flat-primary {
+  background: none;
+}
+.app_theme_d .waves-effect.md-btn-flat-primary .waves-ripple {
+  background: rgba(0, 172, 193, 0.4);
+}
+.app_theme_d .search_list_link {
+  color: #673ab7;
+}
+.app_theme_d .chatbox.cb_active .chatbox_header {
+  background: #00838f;
+}
+.app_theme_d .chatbox_content .chatbox_message.own .chatbox_message_content li > span {
+  background: #00acc1;
+}
+.app_theme_d .uk-table tr.row_checked td,
+.app_theme_d .uk-table-hover tbody tr:hover {
+  background: #e0f7fa;
+}

@@ -18,7 +18,7 @@
 		tooltip: 'always',
 		tooltip_split: true,
 		formatter: function(value) {
-			return '$ ' + value;
+            return '£ ' + value;
 		}
 	});
 
@@ -99,6 +99,9 @@
 		}
 	});
 	
-	   
+    $("li.dropdown").on('click', function (e) {
+        e.currentTarget.addClass('open');
+    });
 
+    $("#user_avatar_img").attr("src", localStorage.getItem("user_avatar"));
 })(jQuery);

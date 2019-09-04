@@ -1,0 +1,141 @@
+﻿@model TicketsXchange.Models.Ticket
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var price = (float)Model.Price;
+    var total_price = price * Int32.Parse(ViewBag.Amount);
+    var fee = 12;
+}
+<input type="hidden" value="@Model.Id" id="ticket_id" />
+<input type="hidden" value="@ViewBag.Amount" id="ticket_amount" />
+<section class="section-page-header">
+    <div class="container">
+        <h1 class="entry-title">Review Order</h1>
+    </div>
+</section>
+
+<section class="section-page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    <p><i class="fa fa-check" aria-hidden="true"></i> Ticket price has been confirmed. Check your order review below and click Checkout to continue.</p>
+                </div>
+            </div>
+
+            <div id="primary" class="col-md-6">
+                <div class="section-order-details-event-info">
+                    <div class="venue-details">
+                        <h3>Venue & Event Information</h3>
+                        <div class="venue-details-info">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+                                    <div class="section-order-review-event">
+                                        <span class="event-caption">@Model.Category.Name</span>
+                                        <h2 class="event-title">@Model.Name</h2>
+                                        <p>@Model.Location</p>
+                                        <p> <span>@Model.Date</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="seat-details">
+                        <h3> Order Information</h3>
+                        <div class="seat-details-info">
+
+                            <table class="table number-tickets">
+                                <thead>
+                                    <tr>
+                                        <th>Delivery</th>
+                                        <th>Number of Tickets</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Instant Download</td>
+                                        <td>@ViewBag.Amount</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="secondary" class="col-md-6">
+                <div class="section-order-review-pricing">
+                    <div class="pricing-coupon">
+                        <h3>Pricing & Coupon</h3>
+                        <div class="coupon">
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-4">
+                                    <div class="coupon-title">
+                                        <span>Enter Coupon Code Here</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-lg-8">
+                                    <div class="coupon-form">
+                                        <input type="text" placeholder="Code">
+                                        <input type="submit" value="Update">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing">
+                            <table class="table pricing-review">
+                                <tbody>
+                                    <tr>
+                                        <td>Ticket price (@ViewBag.Amount x £ @price)</td>
+                                        <td>£ @total_price</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Fee</td>
+                                        <td>£ @fee</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Total Price</td>
+                                        <td class="total-price">£ @(fee + total_price)</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="delivery-method">
+                        <h3>Delivery</h3>
+                        <div class="delivery-info">
+                            <span>Instant Download</span>
+                            <p>Available to download within few minutes</p>
+                        </div>
+                    </div>
+
+                    <div class="section-order-details-event-action">
+                        <div class="row">
+                            <div class="col-sm-offset-5 col-sm-7 col-lg-offset-6 col-lg-6">
+                                <a class="primary-link" id="proceed_button">Proceed Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#proceed_button').click(function (e) {
+                window.location.href="/Search/Payment/" + $('#ticket_id').val() + "?amount=" + $('#ticket_amount').val()
+            })
+
+        });
+    </script>
+
+}
+

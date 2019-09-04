@@ -172,9 +172,16 @@
 	#site-navigation .navbar-toggle{
 		background:rgba(247,249,252, 0.7);
 		border:2px solid #f7f9fc;
-		margin:6px 0;
+		margin:16px 0 -5px 0;
 	}
-	
+    .site-title {
+        margin: 0;
+        font-size: 2em;
+        color: white;
+    }
+    .modal-content{
+        width: calc(100vw - 10px);
+    }
 	#site-navigation .navbar-toggle .icon-bar{
 		background:#fff;
 		transform:none!important;
@@ -1058,5 +1065,5 @@
 	.section-recent-videos .section-content .video-title a{
 		min-height:auto;
 	}
-	
+  
 }

@@ -16,11 +16,17 @@ namespace TicketsXchange
                         "~/Content/js/jquery.countdown.min.js",
                         "~/Content/js/jquery.flexslider-min.js",
                         "~/Content/js/jquery.imagemapster.min.js",
+                        "~/Content/js/jquery.autocomplete.min.js",
+                        "~/Content/js/handlebars.js",
                         "~/Content/js/tooltip.js",
                         "~/Content/js/bootstrap.min.js",
                         "~/Content/js/featherlight.min.js",
                         "~/Content/js/featherlight.gallery.min.js",
                         "~/Content/js/bootstrap.offcanvas.min.js",
+                        "~/Content/js/datepicker.min.js",
+                        "~/Content/js/datepicker.en.js",
+                        "~/Content/js/typehead.js",
+                        "~/Content/js/validator.min.js",
                         "~/Content/js/main.js",
                         "~/Content/js/login_modal.js"
                         ));
@@ -42,10 +48,11 @@ namespace TicketsXchange
                       "~/Content/css/featherlight.min.css",
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/css/bootstrap.offcanvas.min.css",
+                      "~/Content/css/datepicker.min.css",
                       "~/Content/css/core.css",
                       "~/Content/css/style.css",
-                      "~/Content/css/responsive.css",
-                      "~/Content/css/login_modal.css"
+                      "~/Content/css/login_modal.css",
+                      "~/Content/css/responsive.css"
                       ));
 
         }

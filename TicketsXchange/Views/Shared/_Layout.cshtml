@@ -6,12 +6,14 @@
     <title>Ticket</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    @if(ViewBag.Page == "Home")
+    @if (ViewBag.Page == "Home")
     {
-         <header id="masthead" class="site-header fix-header header-1">
+        <header id="masthead" class="site-header fix-header header-1">
             <div class="top-header top-header-bg">
                 <div class="container">
                     <div class="row">
@@ -20,21 +22,23 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-phone"></i>
-                                        +62274 889767
+                                        +447447555123
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:helloMyTicket.com">
+                                    <a href="mailto:info@ticketsxchange.co.uk">
                                         <i class="fa fa-envelope-o"></i>
-                                        helloMyTicket.com
+                                        info@ticketsxchange.co.uk
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="top-right">
                             <ul>
-                                <li><a data-toggle="modal" data-target="#login-modal">Login | Signup</a></li>
-
+                                @if (Session["UserID"] == null || Session["UserID"] as int? < 0)
+                                {
+                                    <li><a data-toggle="modal" data-target="#login-modal">Login | Signup</a></li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -44,13 +48,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="site-branding col-md-3">
-                            <h1 class="site-title">@Html.ActionLink("TicketsXchange", "Index", "Home")</h1>
+                            @Html.ActionLink("TicketsXchange", "Index", "Home", new Object { }, new { @class = "site-title" })
                         </div>
 
                         <div class="col-md-9">
                             <nav id="site-navigation" class="navbar">
                                 <div class="navbar-header">
-                                    <div class="mobile-cart"><a href="#">0</a></div>
                                     <button type="button" class="navbar-toggle offcanvas-toggle pull-right" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas">
                                         <span class="sr-only">Toggle navigation</span>
                                         <span class="icon-bar"></span>
@@ -68,6 +71,24 @@
                                         <li>@Html.ActionLink("About", "Index", "About")</li>
                                         <li>@Html.ActionLink("Sell", "Index", "Sell")</li>
                                         <li>@Html.ActionLink("Buy", "Index", "Search")</li>
+                                        @if (Session["UserID"] as int? > 0)
+                                        {
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle user-account" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <img id="user_avatar_img" src="~/Content/images/user-avatar.png" />
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu account-menu">
+                                                    <li>@Html.ActionLink("Profile", string.Format("Edit/{0}", Session["UserID"]), "Profile")</li>
+                                                    <li role="separator" class="divider"></li>
+                                                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                                                </ul>
+                                            </li>
+                                        }
+                                        @if (Session["UserID"] == null || Session["UserID"] as int? < 0)
+                                        {
+                                            <li class="navbar-login"><a data-toggle="modal" data-target="#login-modal">Login | Signup</a></li>
+                                        }
 
                                     </ul>
                                 </div>
@@ -77,7 +98,9 @@
                 </div>
             </div>
         </header>
-    }else{
+    }
+    else
+    {
         <header id="masthead" class="site-header">
             <div class="top-header top-header-bg">
                 <div class="container">
@@ -87,21 +110,23 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-phone"></i>
-                                        +62274 889767
+                                        +447447555123
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:helloMyTicket.com">
+                                    <a href="mailto:info@ticketsxchange.co.uk">
                                         <i class="fa fa-envelope-o"></i>
-                                        helloMyTicket.com
+                                        info@ticketsxchange.co.uk
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="top-right">
                             <ul>
-                                <li><a data-toggle="modal" data-target="#login-modal">Login | Signup</a></li>
-
+                                @if (Session["UserID"] == null || Session["UserID"] as int? < 0)
+                                {
+                                    <li><a data-toggle="modal" data-target="#login-modal">Login | Signup</a></li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -117,7 +142,6 @@
                         <div class="col-md-9">
                             <nav id="site-navigation" class="navbar">
                                 <div class="navbar-header">
-                                    <div class="mobile-cart"><a href="#">0</a></div>
                                     <button type="button" class="navbar-toggle offcanvas-toggle pull-right" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas">
                                         <span class="sr-only">Toggle navigation</span>
                                         <span class="icon-bar"></span>
@@ -135,7 +159,20 @@
                                         <li>@Html.ActionLink("About", "Index", "About")</li>
                                         <li>@Html.ActionLink("Sell", "Index", "Sell")</li>
                                         <li>@Html.ActionLink("Buy", "Index", "Search")</li>
-
+                                        @if (Session["UserID"] as int? > 0)
+                                        {
+                                            <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle user-account" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <img id="user_avatar_img" src="~/Content/images/user-avatar.png" />
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class="dropdown-menu account-menu">
+                                                    <li>@Html.ActionLink("Profile", string.Format("Edit/{0}", Session["UserID"]), "Profile")</li>
+                                                    <li role="separator" class="divider"></li>
+                                                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                                                </ul>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </nav>
@@ -146,7 +183,7 @@
         </header>
 
     }
-                
+
 
     @RenderBody()
 
@@ -154,7 +191,7 @@
         <div class="top-footer">
             <div class="container">
                 <div class="row text-center">
-                    <h3>&copy; 2019 TicketsXchange. ALL RIGHTS RESEVED</h3>
+                    <h3>&copy; 2019 TicketsXchange. All Rights Reserved.</h3>
                 </div>
             </div>
         </div>
@@ -162,7 +199,7 @@
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;z-index:99999999;">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header" align="center">                    
+                <div class="modal-header" align="center">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="fa fa-times" aria-hidden="true"></span>
                     </button>
@@ -172,16 +209,23 @@
                 <div id="div-forms">
 
                     <!-- Begin # Login Form -->
-                    <form id="login-form">
+                    <form id="login-form" action="/Home/Login" data-toggle="validator" role="form" method="post">
                         <div class="modal-body">
-                            <h3>Sign In. Get Going.</h3><br/>
-                            <span>Email Address</span>
-                            <input id="login_username" class="form-control" type="text"  required>
-                            <span>Password</span>
-                            <input id="login_password" class="form-control" type="password"  required>
-                            <div class="checkbox">
+                            <h3>Sign In. Get Going.</h3><br />
+                            <div class="form-group">
+                                <label for="login_username" class="control-label">Email Address</label>
+                                <input id="login_username" class="form-control" type="email" name="Email" data-error="Bruh, that email address is invalid" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="login_password" class="control-label">Password</label>
+                                <input id="login_password" class="form-control" type="password" data-minlength="6" name="Password" required>
+                                <div class="help-block">Minimum of 6 characters</div>
+                            </div>
+                            <div class="checkbox login-remember-check">
+                                <input type="checkbox">
                                 <label>
-                                    <input type="checkbox"> Remember Me
+                                    Remember Me
                                 </label>
                             </div>
                         </div>
@@ -199,11 +243,15 @@
                     </form>
                     <!-- End # Login Form -->
                     <!-- Begin | Lost Password Form -->
-                    <form id="lost-form" style="display:none;">
+                    <form id="lost-form" action="/Home/ForgotPassword" data-toggle="validator" role="form" method="post" style="display:none;">
                         <div class="modal-body">
-                            <h3>Reset Password</h3> <br/>
-                            <span>Email Address</span>
-                            <input id="lost_email" class="form-control" type="text" required>
+                            <h3>Reset Password</h3> <br />
+                            <input name="Id" type="hidden" value="@ViewBag.UserId"/>
+                            <div class="form-group">
+                                <label for="lost_email" class="control-label">Email Address</label>
+                                <input id="lost_email" class="form-control" type="email" name="Email" data-error="Bruh, that email address is invalid" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div>
@@ -216,19 +264,34 @@
                     </form>
                     <!-- End | Lost Password Form -->
                     <!-- Begin | Register Form -->
-                    <form id="register-form" style="display:none;">
+                    <form id="register-form" data-toggle="validator" role="form" style="display:none;">
                         <div class="modal-body">
                             <h3>Sign Up. Get Access.</h3><br />
-                            <span>First Name</span>
-                            <input id="register_firstname" class="form-control" type="text" required>
-                            <span>Last Name</span>
-                            <input id="register_lastname" class="form-control" type="text" required>
-                            <span>Email Address</span>
-                            <input id="register_email" class="form-control" type="email" required>
-                            <span>Password</span>
-                            <input id="register_password" class="form-control" type="password" required>
-                            <span>Confirm Password</span>
-                            <input id="register_confirmpassword" class="form-control" type="password" required>
+                            <div class="form-group">
+                                <label for="register_firstname" class="control-label">First Name</label>
+                                <input id="register_firstname" class="form-control" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register_lastname" class="control-label">Last Name</label>
+                                <input id="register_lastname" class="form-control" type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register_email" class="control-label" data-error="Bruh, that email address is invalid">Email Address</label>
+                                <input id="register_email" class="form-control" type="email" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="register_password" class="control-label">Password</label>
+                                <input id="register_password" class="form-control" type="password" data-minlength="6" required>
+                                <div class="help-block">Minimum of 6 characters</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="register_confirmpassword">Confirm Password</label>
+                                <input id="register_confirmpassword" class="form-control" type="password" data-match="#register_password" data-match-error="Whoops, these don't match" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+
+
                         </div>
                         <div class="modal-footer">
                             <div>
@@ -240,7 +303,6 @@
                         </div>
                     </form>
                     <!-- End | Register Form -->
-
                 </div>
                 <!-- End # DIV Form -->
 
@@ -256,26 +318,99 @@
                     </button>
                 </div>
 
-                <form id="contactus-form">
+                <form id="contactus-form" action="/Home/Contact" data-toggle="validator" role="form">
                     <div class="modal-body">
-                        <h3>Contact Us</h3><br />
-                        <h6>Name</h6>
-                        <input id="contactus_name" class="form-control" type="text" required>
-                        <h6>Email Address</h6>
-                        <input id="contactus_email" class="form-control" type="text" required>
-                        <h6>Subject</h6>
-                        <input id="contactus_subject" class="form-control" type="text" required>
-                        <h6>Your Messages</h6>
-                        <textarea id="contact_message" class="form-control" type="text" required></textarea>
+                        <h3>Contact Us</h3><br/>
+                        <div class="form-group">
+                            <label for="contactus_name" class="control-label">Name</label>
+                            <input id="contactus_name" name="Name" class="form-control" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactus_email" class="control-label" data-error="Bruh, that email address is invalid">Email Address</label>
+                            <input id="contactus_email" class="form-control" name="Email" type="email" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactus_subject" class="control-label">Subject</label>
+                            <input id="contactus_subject" class="form-control" name="Subject" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_message" class="control-label">Your Messages</label>
+                            <textarea id="contact_message" class="form-control" type="text" name="Detail" required></textarea>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
                         </div>
-                        
                     </div>
                 </form>
-                
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" style="display: none;z-index:99999999;">
+        <div class="modal-dialog">
+            <div class="modal-content text-center">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <h1>Congratulations! </h1>
+                <hr />
+                <span style="font-size:150px;color:limegreen;"><i class="fa fa-check-circle"></i></span>
+                <p>Your account is Verified.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" style="display: none;z-index:99999999;">
+        <div class="modal-dialog">
+            <div class="modal-content text-center">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <h1>Success! </h1>
+                <hr />
+                <span style="font-size:150px;color:limegreen;"><i class="fa fa-check-circle"></i></span>
+                <p id="success-modal-text">Password is reset.</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="reset-modal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true" style="display: none;z-index:99999999;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <form id="reset-form" action="/Home/ResetPassword" data-toggle="validator" role="form" method="post">
+                    <div class="modal-body">
+                        <h3>Reset your password</h3><br />
+                        <input type="hidden" value="@ViewBag.UserId" name="Id"/>
+                        <div class="form-group">
+                            <label for="reset_password" class="control-label">Password</label>
+                            <input id="reset_password" class="form-control" name="Password" type="password" data-minlength="6" required>
+                            <div class="help-block">Minimum of 6 characters</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="reset_confirmpassword">Confirm Password</label>
+                            <input id="reset_confirmpassword" class="form-control" type="password" data-match="#reset_password" data-match-error="Whoops, these don't match" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

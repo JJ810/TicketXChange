@@ -4,40 +4,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<input type="hidden" value="@ViewBag.Event" id="search_event">
+<input type="hidden" value="@ViewBag.Category" id="search_category">
+<input type="hidden" value="@ViewBag.Location" id="location_search">
 
 <section class="section-refine-search">
     <div class="container">
         <div class="row">
-            <form>
-                <div class="keyword col-sm-6 col-md-4">
-                    <label>Search Keyword</label>
-                    <input type="text" class="form-control hasclear" placeholder="Search">
-                    <span class="clearer"><img src="images/clear.png" alt="clear"></span>
-                </div>
-                <div class="location col-sm-6 col-md-3">
-                    <label>Location</label>
-                    <select class="selectpicker dropdown">
-                        <option>Select Location</option>
-                        <option>San Francisco</option>
-                        <option>Foxborough </option>
-                        <option>Buffalo</option>
-                        <option>Auburn Hills</option>
-                    </select>
-                </div>
-                <div class="event-date col-sm-6 col-md-3">
-                    <label>Event Date</label>
-                    <select class="selectpicker dropdown">
-                        <option>Select Date</option>
-                        <option>August 1st, 2016</option>
-                        <option>August 2nd, 2016</option>
-                        <option>August 3rd, 2016</option>
-                        <option>August 4th, 2016</option>
-                    </select>
-                </div>
-                <div class="col-sm-6 col-md-2">
-                    <input type="submit" value="Search">
-                </div>
-            </form>
+            <div class="keyword col-sm-6 col-md-3">
+                <label>Event Name</label>
+                <input type="text" id="search_name" class="form-control hasclear">
+                <span class="clearer"><img src="~/Content/images/clear.png" alt="clear"></span>
+            </div>
+            <div class="keyword col-sm-6 col-md-3">
+                <label>Location</label>
+                <input type="text" id="search_location" class="form-control hasclear">
+                <span class="clearer"><img src="~/Content/images/clear.png" alt="clear"></span>
+            </div>
+            <div class="event-date keyword col-sm-6 col-md-3">
+                <label>Event Date</label>
+                <input class="datepicker-here form-control hasclear" name="Date" id="search_date" data-language="en" data-date-format="yyyy-mm-dd" required />
+                <span class="clearer"><img src="~/Content/images/clear.png" alt="clear"></span>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <input type="submit" id="search_button" value="Search">
+            </div>
         </div>
     </div>
 </section>
@@ -48,104 +39,27 @@
             <div id="secondary" class="col-md-4 col-lg-3">
                 <div class="search-filter">
                     <div class="search-event-title">
-                        <h2><span>Event</span> Sports </h2>
+                        <h2> Filter </h2>
                     </div>
-                    <div class="search-filter-delivery">
-                        <h3>Delivery</h3>
-                        <div class="checkbox">
-                            <input id="delivery1" class="styled" type="checkbox" checked="">
-                            <label for="delivery1">
-                                All
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="delivery2" class="styled" type="checkbox">
-                            <label for="delivery2">
-                                Electronic
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="delivery3" class="styled" type="checkbox">
-                            <label for="delivery3">
-                                Instant
-                            </label>
-                        </div>
-                    </div>
+
                     <div class="search-filter-category">
                         <h3>Categories</h3>
-                        <div class="checkbox">
-                            <input id="category1" class="styled" type="checkbox" checked="">
-                            <label for="category1">
-                                All
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="category2" class="styled" type="checkbox">
-                            <label for="category2">
-                                Backetball
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="category3" class="styled" type="checkbox">
-                            <label for="category3">
-                                Football
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="category4" class="styled" type="checkbox">
-                            <label for="category4">
-                                Golf
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="category5" class="styled" type="checkbox">
-                            <label for="category5">
-                                Soccer
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="category6" class="styled" type="checkbox">
-                            <label for="category6">
-                                Tennis
-                            </label>
-                        </div>
+
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <div class="checkbox">
+                                <input id="category_@category.Id" class="styled search-category" value="@category.Id" type="checkbox" checked>
+                                <label for="category_@category.Id">
+                                    @category.Name
+                                </label>
+                            </div>
+                        }
+
                     </div>
-                    <div class="search-filter-seat-features">
-                        <h3>Seat Features</h3>
-                        <div class="checkbox">
-                            <input id="features1" class="styled" type="checkbox" checked="">
-                            <label for="features1">
-                                All
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="features2" class="styled" type="checkbox">
-                            <label for="features2">
-                                Aisle
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="features3" class="styled" type="checkbox">
-                            <label for="features3">
-                                Ex-Obstucted View
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="features4" class="styled" type="checkbox">
-                            <label for="features4">
-                                Parking Pass Included
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <input id="features5" class="styled" type="checkbox">
-                            <label for="features5">
-                                Wheelchair Accessible
-                            </label>
-                        </div>
-                    </div>
+
                     <div class="search-filter-price">
                         <h3>Price</h3>
-                        <input id="price-range" type="text" class="span2" value="" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" />
+                        <input id="price-range" type="text" class="span2" value="" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[0,200]" />
                     </div>
                 </div>
             </div>
@@ -155,224 +69,172 @@
                 <div class="search-result-header">
                     <div class="row">
                         <div class="col-sm-7">
-                            <h2>All Sports Events at San Francisco</h2>
-                            <span>Showing 1-10 of 32 Results</span>
+                            <h2>Search Results</h2>
+                            <span class="show-page-range"></span>
                         </div>
                         <div class="col-sm-5">
                             <label>Sort By</label>
-                            <select class="selectpicker dropdown">
-                                <option>Price: Low-High</option>
-                                <option>Price: High-Low</option>
+                            <select class="selectpicker dropdown" id="search_sort">
+                                <option value="0">Price: Low-High</option>
+                                <option value="1">Price: High-Low</option>
                             </select>
                         </div>
                     </div>
                 </div>
+                <div id="loadingDiv">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </div>
+                <div class="search-result-content">
 
-                <div class="search-result-item">
-                    <div class="row">
-                        <div class="search-result-item-info col-sm-9">
-                            <h3>Tennis San Francisco Open</h3>
-                            <ul class="row">
-                                <li class="col-sm-5 col-lg-6">
-                                    <span>Venue</span>
-                                    Gillette Stadium (Foxborough, MA)
-                                </li>
-                                <li class="col-sm-4 col-lg-3">
-                                    <span>Saturday</span>
-                                    July. 30th, 2016
-                                </li>
-                                <li class="col-sm-3">
-                                    <span>Time</span>
-                                    07:00 PM
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="search-result-item-price col-sm-3">
-                            <span>Price From</span>
-                            <strong>$101</strong>
-                            <a href="#">Book Now</a>
-                        </div>
-                    </div>
                 </div>
-                <div class="search-result-item sold-out">
-                    <div class="row">
-                        <div class="search-result-item-info col-sm-9">
-                            <h3>Golf Master SF Championship</h3>
-                            <ul class="row">
-                                <li class="col-sm-5 col-lg-6">
-                                    <span>Venue</span>
-                                    First Niagara Center (Buffalo, NY)
-                                </li>
-                                <li class="col-sm-4 col-lg-3">
-                                    <span>Saturday</span>
-                                    August. 1st, 2016
-                                </li>
-                                <li class="col-sm-3">
-                                    <span>Time</span>
-                                    07:00 PM
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="search-result-item-price col-sm-3">
-                            <span>Price From</span>
-                            <strong>$113</strong>
-                            <a href="#">Sold Out</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="search-result-item sale">
-                    <div class="ribbon"><span>Sale</span></div>
-                    <div class="row">
-                        <div class="search-result-item-info col-sm-9">
-                            <h3>UEFA Champions League final (FC Barcelona v AC Milan)</h3>
-                            <ul class="row">
-                                <li class="col-sm-5 col-lg-6">
-                                    <span>Venue</span>
-                                    Palace Of Auburn Hills (Auburn Hills, MI)
-                                </li>
-                                <li class="col-sm-4 col-lg-3">
-                                    <span>Saturday</span>
-                                    August. 3rd, 2016
-                                </li>
-                                <li class="col-sm-3">
-                                    <span>Time</span>
-                                    07:00 PM
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="search-result-item-price col-sm-3">
-                            <span>Price From</span>
-                            <strong><span>$140</span>$125</strong>
-                            <a href="#" class="sold-out">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="search-result-item">
-                    <div class="row">
-                        <div class="search-result-item-info col-sm-9">
-                            <h3>FA Cup final (Manchester City v Leicester City)</h3>
-                            <ul class="row">
-                                <li class="col-sm-5 col-lg-6">
-                                    <span>Venue</span>
-                                    First Niagara Center (Buffalo, NY)
-                                </li>
-                                <li class="col-sm-4 col-lg-3">
-                                    <span>Saturday</span>
-                                    August. 1st, 2016
-                                </li>
-                                <li class="col-sm-3">
-                                    <span>Time</span>
-                                    07:00 PM
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="search-result-item-price col-sm-3">
-                            <span>Price From</span>
-                            <strong>$140</strong>
-                            <a href="#">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="search-result-item">
-                    <div class="row">
-                        <div class="search-result-item-info col-sm-9">
-                            <h3>NBA Finals</h3>
-                            <ul class="row">
-                                <li class="col-sm-5 col-lg-6">
-                                    <span>Venue</span>
-                                    CONSOL Energy Center (Pittsburgh, PA)
-                                </li>
-                                <li class="col-sm-4 col-lg-3">
-                                    <span>Saturday</span>
-                                    August. 5th, 2016
-                                </li>
-                                <li class="col-sm-3">
-                                    <span>Time</span>
-                                    07:00 PM
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="search-result-item-price col-sm-3">
-                            <span>Price From</span>
-                            <strong>$155</strong>
-                            <a href="#">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="search-result-item sold-out">
-                    <div class="row">
-                        <div class="search-result-item-info col-sm-9">
-                            <h3>Women's Baseball World Cup	</h3>
-                            <ul class="row">
-                                <li class="col-sm-5 col-lg-6">
-                                    <span>Venue</span>
-                                    Lincoln Financial Field (Philadelphia, PA)
-                                </li>
-                                <li class="col-sm-4 col-lg-3">
-                                    <span>Saturday</span>
-                                    August. 6th, 2016
-                                </li>
-                                <li class="col-sm-3">
-                                    <span>Time</span>
-                                    07:00 PM
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="search-result-item-price col-sm-3">
-                            <span>Price From</span>
-                            <strong>$160</strong>
-                            <a href="#">Sold Out</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="search-result-item">
-                    <div class="row">
-                        <div class="search-result-item-info col-sm-9">
-                            <h3>UCI Road World Championships</h3>
-                            <ul class="row">
-                                <li class="col-sm-5 col-lg-6">
-                                    <span>Venue</span>
-                                    Rose Bowl (Pasadena, CA)
-                                </li>
-                                <li class="col-sm-4 col-lg-3">
-                                    <span>Saturday</span>
-                                    August. 20th, 2016
-                                </li>
-                                <li class="col-sm-3">
-                                    <span>Time</span>
-                                    07:00 PM
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="search-result-item-price col-sm-3">
-                            <span>Price From</span>
-                            <strong>$175</strong>
-                            <a href="#">Book Now</a>
-                        </div>
-                    </div>
-                </div>
+
 
                 <div class="search-result-footer">
                     <ul class="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Previous</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li class="active"><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">Next <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@section scripts {
+
+    <script type="text/javascript">
+        function debounce(callback, wait) {
+            let timeout;
+            return (...args) => {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => callback.apply(context, args), wait);
+            };
+        }
+        $(document).ready(function () {
+            localStorage.setItem("UserID", $(".user-id").val())
+            $("#search_name").val($("#search_event").val())
+            $('#search_location').val($('#location_search').val())
+            if ($("#search_category").val().length != 0) {
+                var categories = $(".search-category");
+                for (var c of categories) {
+                    $(c)[0].checked = false;
+                    if ($(c)[0].value == $("#search_category").val()) {
+                        $(c)[0].checked = true;
+                    }
+                }
+            }
+            $('#search_date').data('datepicker')
+            Filter(0);
+            $('#search_button').click((e) => {
+                Filter(0);
+            })
+            $('#search_sort').change((e) => {
+                Filter(0);
+            })
+            $('.search-category').change((e) => {
+                Filter(0);
+            })
+            $('.tooltip-min .tooltip-inner, .tooltip-max .tooltip-inner').bind('DOMSubtreeModified', debounce(function (event) {
+                Filter(0)
+            }, 500));
+        })
+        function Filter(page) {
+            var categories = $(".search-category");
+            var cats = [];
+            for (var c of categories) {
+                if ($(c)[0].checked) {
+                    cats = [$(c).val(), ...cats];
+                }
+            }
+            console.log(cats);
+            $.ajax({
+                url: '/api/TicketSearch',
+                data: {
+                    Name: $("#search_name").val(),
+                    Location: $("#search_location").val(),
+                    Date: $("#search_date").val(),
+                    Page: page,
+                    MinPrice: $("#price-range").val().split(",")[0],
+                    MaxPrice: $("#price-range").val().split(",")[1],
+                    Categories: cats,
+                    Sort: $('#search_sort').val()
+                },
+                method: 'post',
+                success: function (response) {
+                    let totalRows = parseInt(response['TotalRows']);
+                    for (var ticket of response['Result']) {
+                        let date = new Date(ticket.Date);
+                        $('.search-result-content').append('<div class="search-result-item ' + (ticket.IsSold ? 'sale' : '') + '">\
+                                            '+ (ticket.IsSold ? '<div class="ribbon"><span>Sold out</span></div>' : '') + '<div class="row">\
+                                                <div class="search-result-item-info col-sm-9">\
+                                                    <h3>' + ticket.Name + '</h3>\
+                                                    <ul class="row">\
+                                                        <li class="col-sm-5 col-lg-6">\
+                                                            <span>Location</span>\
+                                                           '+ ticket.Location + '\
+                                                        </li>\
+                                                        <li class="col-sm-4 col-lg-3">\
+                                                            <span>Date</span>\
+                                                            '+ date.getFullYear() + ' - ' + (date.getMonth() + 1) + ' - ' + date.getDate() + '\
+                                                        </li>\
+                                                        <li class="col-sm-3">\
+                                                            <span>Time</span>\
+                                                            '+ date.getHours() + ' : ' + date.getMinutes() + '\
+                                                        </li>\
+                                                    </ul>\
+                                                </div>\
+                                                <div class="search-result-item-price col-sm-3">\
+                                                    <span>Price From</span>\
+                                                    <strong>£'+ ticket.Price.toFixed(2) + '</strong>\
+                                                    <a href="/Search/Detail/'+ ticket.Id + '">Detail</a>\
+                                                </div>\
+                                            </div>\
+                                        </div>');
+                    }
+                    let pagesPerScreen = 5;
+                    let itemsPerPage = 5;
+                    let pages = Math.ceil(totalRows / itemsPerPage);
+                    let currentPage = response['CurrentPage'];
+                    if (response['Result'].length == 0)
+                        $('.show-page-range').html('No search results');
+                    else
+                        $('.show-page-range').html('Showing ' + ((currentPage * itemsPerPage) + 1) + ' - ' + (currentPage * itemsPerPage + response['Result'].length) + ' of ' + totalRows + ' Results')
+                    if (pages > 0 && parseInt(currentPage) < pages) {
+                        let currentSection = parseInt(currentPage / pagesPerScreen);
+                        let pagination = '<li>\
+                                            <a class="'+ (currentSection == 0 ? 'disabled' : '') + '" aria-label="Previous">\
+                                                <span aria-hidden="true"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Previous</span>\
+                                            </a>\
+                                        </li>';
+                        for (let i = currentSection * pagesPerScreen; i < (currentSection * pagesPerScreen + pagesPerScreen < pages ? currentSection * pagesPerScreen + pagesPerScreen : pages - currentSection * pagesPerScreen); i++) {
+                            pagination += '<li class="' + (i == currentPage ? 'active' : '') + '"><a class="search-pagination-page" data-page="' + i + '">' + (i + 1) + '</a></li>';
+                        }
+                        pagination += '<li>\
+                                            <a class="' + (currentSection == parseInt((pages - 1) / pagesPerScreen) ? 'disabled' : '') + '" aria-label="Next">\
+                                                <span aria-hidden="true">Next <i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>\
+                                            </a>\
+                                        </li>';
+
+                        $('.pagination').html(pagination);
+                        $('.search-pagination-page').click(function (e) {
+                            Filter($(e.currentTarget).data('page'))
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+
+        }
+        var $loading = $('#loadingDiv').hide();
+        $(document)
+            .ajaxStart(function () {
+                $loading.show();
+                $('.search-result-content').html('')
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+            });
+    </script>
+
+}
 

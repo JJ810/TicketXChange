@@ -1,0 +1,130 @@
+﻿@model TicketsXchange.Models.Ticket
+@{
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var price = (float)Model.Price;
+}
+<input type="hidden" value="@Model.Id" id="ticket_id" />
+<input type="hidden" value="@Model.Balance" id="balance" />
+<input type="hidden" value="@price" id="price" />
+<section class="section-page-header">
+    <div class="container">
+        <h1 class="entry-title">Order Details</h1>
+    </div>
+</section>
+
+<section class="section-page-content">
+    <div class="container">
+        <div class="row">
+            <div id="primary" class="col-md-6">
+                <div class="section-order-details-event-title">
+                    <span class="event-caption">@Model.Category.Name</span>
+                    <h2 class="event-title"><strong>@Model.Name</strong></h2>
+                    <img class="event-img" src="~/Content/images/order-details-img.jpg" alt="image">
+                </div>
+            </div>
+
+            <div id="secondary" class="col-md-6">
+                <div class="section-order-details-event-info">
+                    <div class="venue-details">
+                        <h3></h3>
+                        <div class="venue-details-info">
+                            <p>@Model.Location</p>
+                            <p>@Model.Date</p>
+                        </div>
+                    </div>
+
+                    <div class="seat-details">
+                        <h3>Order Information</h3>
+                        <div class="seat-details-info">
+                            <!--
+                                <table class="table seat-row">
+                                    <thead>
+                                        <tr>
+                                            <th>Section</th>
+                                            <th>Row</th>
+                                            <th>Seats</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>C16-Middle</td>
+                                            <td>5</td>
+                                            <td>10-12</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            -->
+
+                            <table class="table number-tickets">
+                                <thead>
+                                    <tr>
+                                        <th>Delivery</th>
+                                        <th>Number of Tickets</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Instant Download</td>
+                                        <td>
+                                            <div class="qty-select">
+                                                <div class="qty-minus">
+                                                    <a class="qty-btn" id="decrease_amount">-</a>
+                                                </div>
+                                                <div class="qty-input">
+                                                    <input type="text" class="quantity-input" id="amount" value="1" />
+                                                </div>
+                                                <div class="qty-plus">
+                                                    <a class="qty-btn" id="increase_amount">+</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="seat-details-info-price">
+                            <table class="table total-price">
+                                <tbody>
+                                    <tr>
+                                        <td>Total Price</td>
+                                        <td class="price" id="total_price">£ @price</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-order-details-event-action">
+                    <ul class="row">
+                        <li class="col-xs-6 col-sm-6">
+                            <a class="secondary-link" href="/Search/Detail/@Model.Id">Back</a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6">
+                            <a class="primary-link" id="order_button">Place Order</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#increase_amount,#decrease_amount').click(function (e) {
+                if (parseInt($('#amount').val()) > parseInt($('#balance').val())) {
+                    $('#amount').val($('#balance').val())
+                }
+                $('#total_price').html('£ ' + (parseInt($('#amount').val()) * parseFloat($('#price').val())).toFixed(2))
+            })
+            $('#order_button').click(function (e) {
+                window.location.href = "/Search/Review/" + $("#ticket_id").val() + "?amount=" + $('#amount').val();
+            })
+        })
+    </script>
+
+}

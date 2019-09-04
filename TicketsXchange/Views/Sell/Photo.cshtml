@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+
+
+}
+<input type="hidden" value="@ViewBag.CategoryId" id="event_id" />
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="sell-container col-md-offset-2 col-md-8">
+                <h2 style="margin-bottom:30px;">Upload your tickets</h2>
+                <form action="/api/Ticket/UploadPhoto" class="dropzone" id="photos"></form>
+                <div class="col-md-offset-9 col-md-4 select-ticket-next-button-row">
+                    <a class="primary-link select-ticket-next-button">Next</a>
+                </div>
+            </div>          
+        </div>
+    </div>
+</section>
+
+@section scripts {
+
+    <script type="text/javascript">
+        $('#photos').on('DOMSubtreeModified', function(e){
+            if ($(e.currentTarget).children().length > 1) {
+                $('.select-ticket-next-button-row').show();
+            } else {
+                $('.select-ticket-next-button-row').hide();
+            }
+        })
+        $('.select-ticket-next-button-row').click(function (e) {
+            window.location.href = "/Sell/Submit/" + $("#event_id").val();
+        })
+        $(document).ready(function () {
+            $('.select-ticket-next-button').click(function (e) {
+                window.location.href = "/Sell/Photo/" + localStorage.getItem('currentItem');
+            })
+
+        });
+
+    </script>
+
+}

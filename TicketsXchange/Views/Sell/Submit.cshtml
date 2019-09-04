@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="sell-container col-md-offset-2 col-md-8">
+                <h2 style="margin-bottom:30px;">Advertise your ticket</h2>
+                <form action="/Sell/Add" data-toggle="validator" role="form" id="photos">
+                    <input type="hidden" value="@ViewBag.CategoryId" name="CategoryId" id="event_id" />
+
+                    <div class="form-group">
+                        <label for="name" class="control-label">Name</label>
+                        <input id="name" class="form-control" name="Name" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="details" class="control-label">Details</label>
+                        <input id="details" class="form-control" name="Details" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price" class="control-label">Date</label>
+                        <input class="datepicker-here form-control" name="Date" id="date_picker" data-language="en" data-date-format="yyyy-mm-dd" data-timepicker="true" required />
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price" class="control-label">Price</label>
+                        <input id="price" class="form-control" name="Price" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="location" class="control-label">Location</label>
+                        <input id="location" class="form-control" name="Location" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity" class="control-label">Quantity</label>
+                        <input id="quantity" class="form-control" name="Quantity" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="paymentMethod">Payment Method</label>
+                        <select id="paymentMethod" class="form-control" name="paymentMethod" required>
+                            <option>Select Payment Method</option>
+                            <option value="0">Credit Card</option>
+                            <option value="1">Cash</option>
+                            <option value="2">Free</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="primary-link btn col-md-12 select-ticket-next-button" style="width:100%">Sell</button>
+                    </div>
+                </form>
+                
+            </div>          
+        </div>
+    </div>
+</section>
+
+@section scripts {
+
+    <script type="text/javascript">
+ 
+        $(document).ready(function () {
+            $('#date_picker').data('datepicker')
+
+        });
+
+    </script>
+
+}

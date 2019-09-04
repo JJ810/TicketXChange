@@ -37,18 +37,7 @@ namespace TicketsXchange.Helper
         {
             // Hash the input.
             string hashOfInput = getMd5Hash(input);
-
-            // Create a StringComparer an compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-            if (0 == comparer.Compare(hashOfInput, hash))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return string.Compare(hashOfInput, hash.Trim()) == 0;
         }    
 
     }

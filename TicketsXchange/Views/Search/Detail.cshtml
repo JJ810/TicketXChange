@@ -1,0 +1,163 @@
+﻿@model TicketsXchange.Models.Ticket
+@{
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var price = (float)Model.Price;
+}
+
+<section class="section-event-single-featured-header" style="background-image:url(@Model.Category.Photo)">
+    <div class="container">
+        <div class="section-content">
+            <h1>@Model.Name</h1>
+            <p>
+                <span>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i> @Model.Location
+                </span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section-event-single-header">
+    <div class="container">
+        <h1></h1>
+        <ul class="ticket-purchase">
+            <li>
+                Ticket from
+            </li>
+            <li>
+                <span>£ @price</span>
+            </li>
+            @if(Model.Balance != 0 && Model.PaymentMethod == 0)
+            {
+                <li>
+                    <a href="/Search/Order/@Model.Id">Purchase Ticket</a>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="section-event-single-content">
+    <div class="container">
+        <div class="row">
+            <div id="primary" class="col-sm-12 col-md-12">
+                <div class="event-features">
+                    <ul>
+                        <li>
+                            <i class="fa fa-mobile fa-3x" aria-hidden="true"></i>
+                            Smartphone <br> tickets accepted
+                        </li>
+                        <li>
+                            <i class="fa fa-hourglass-o fa-2x" aria-hidden="true"></i>
+                            Duration: 1 hour <br> and 30 minutes
+                        </li>
+                        <li>
+                            <i class="fa fa-subway fa-2x" aria-hidden="true"></i>
+                            Metro Line 3: stop Palau <br> Reial or Les Corts
+                        </li>
+                        <li>
+                            <i class="fa fa-car fa-2x" aria-hidden="true"></i>
+
+                            Car Parking:<br> Available
+                        </li>
+                    </ul>
+                </div>
+                <div class="event-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="event-info-img">
+                                <div id="slider" class="flexslider">
+                                    <ul class="slides">
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="carousel" class="flexslider">
+                                    <ul class="slides">
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                        <li>
+                                            <img src="~/Content/images/event-single-slider.jpg" alt="image" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="event-info-about">
+                                <h2>ABOUT THIS EVENT</h2>
+                                <p>@Model.Details</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-highlights">
+                    <h2>Highlights</h2>
+                    <p>Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.</p>
+                    <p>Omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui. Mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.</p>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <ul>
+                                <li>Enjoy a self-guided tour through the home stadium of Messi, Neymar, Iniesta and Suarez, including the opportunity to walk onto the famous pitch surrounded by nearly 100,000 screaming fans (you'll need to imagine the last part)</li>
+                                <li>See 23 Liga and five Champions League trophies in a trophy cabinet that looks more like a treasure chest</li>
+                                <li>
+                                    Experience the very cool and interactive museum, with touch screens, sound installations that put you at the heart of the action
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-location">
+                    <h2>Location</h2>
+                    <p> @Model.Location</p>
+                </div>
+                @if (Model.PaymentMethod != 0)
+                {
+                    <div class="event-highlights">
+                        <h2>Contact</h2>
+                        <a href="mailto:@(Model.User.Email)">
+                            <i class="fa fa-envelope-o"></i>
+                            @Model.User.Email
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            localStorage.setItem("UserID", $(".user-id").val())
+            $('#search_date').data('datepicker')
+            Filter(0);
+            $('#search_button').click((e) => {
+                Filter(0);
+            })
+            $('#search_sort').change((e) => {
+                Filter(0);
+            })
+        });
+    </script>
+}
+

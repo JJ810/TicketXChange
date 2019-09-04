@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a513a730a133460ea1fb1659c2779cbe" Name="Diagram1">
+        <EntityTypeShape EntityType="TicketsXchangeModel.Balance" Width="1.5" PointX="5.25" PointY="10.5" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Category" Width="1.5" PointX="1.5" PointY="4.125" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Contact" Width="1.5" PointX="4" PointY="4.625" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Event" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Payment" Width="1.5" PointX="5.25" PointY="17" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Profile" Width="1.5" PointX="3" PointY="21.375" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Sell" Width="1.5" PointX="3" PointY="17.875" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.SubscribeEmail" Width="1.5" PointX="6" PointY="7.125" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.SubscribeLog" Width="1.5" PointX="8.25" PointY="10.875" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Ticket" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.TicketPhoto" Width="1.5" PointX="5.25" PointY="14.25" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.User" Width="1.5" PointX="0.75" PointY="10.25" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Balance_Ticket" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Balance_User" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Event_Category" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Payment_Ticket" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Profile_User" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Sell_User1" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_SubscribeLog_SubscribeEmail" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_SubscribeLog_Ticket" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Ticket_User" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_TicketPhotos_Ticket" />
+        <AssociationConnector Association="TicketsXchangeModel.FK_Ticket_Category" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

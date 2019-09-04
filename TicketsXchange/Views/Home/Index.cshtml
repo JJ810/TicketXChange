@@ -1,161 +1,270 @@
 ﻿
-@{ 
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-        <section class="hero-1">
-            <div class="container">
-                <div class="row">
-                    <div class="hero-content">
-                        <h1 class="hero-title">The safest way to buy and sell e-tickets</h1>
-                        <div class="hero-search">
-                            <input type="text" placeholder="Seach Event">
-                        </div>
-                        <div class="hero-location">
-                            <p><i class="fa fa-map-marker" aria-hidden="true"></i> San Francisco <a href="#">Change Location</a></p>
-                        </div>
-                    </div>
+
+@functions {
+    string getDateElement(String date, int index)
+    {
+        string[] separators = { " ", "-" };
+        string[] strlist = date.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+        string[] months = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
+        if (index == 1)
+            return months[Int32.Parse(strlist[index])];
+        else
+            return strlist[index];
+      
+    }
+}
+<input type="hidden" id="modal_type" value="@ViewBag.modal" />
+<input type="hidden" id="modal_message" value="@ViewBag.message" />
+<section class="hero-1">
+    <div class="container">
+        <div>
+            <div class="hero-content">
+                <div class="hero-title">Buy tickets at less price</div>
+                <p class="hero-caption">You can exchange, buy or sell unwanted tickets</p>
+                <div class="hero-search">
+                    <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                    <input type="text" id="search_event" placeholder="Search Event">
+                    <div id="search_results"></div>
+                </div>
+
+                <div class="hero-location">
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> <span id="address">London</span> <a id="change_location">Change Location</a></p>
+                </div>
+                <div class="select-location">
+                    <div class="location" data-location="london">London</div>
+                    <div class="location" data-location="berlin">Berlin</div>
+                    <div class="location" data-location="paris">Paris</div>
+                    <div class="location" data-location="madrid">Madrid</div>
+                    <div class="location" data-location="rome">Rome</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-    
-        <section class="section-upcoming-events">
-            <div class="container">
-                <div class="row">
-                    <div class="section-header">
-                        <h2>Featured Tickets</h2>
-                   
-                    </div>
-                    <div class="section-content">
-                        <ul class="clearfix">
-                            <li>
-                                <div class="date">
-                                    <a href="#">
-                                        <span class="day">25</span>
-                                        <span class="month">August</span>
-                                        <span class="year">2016</span>
-                                    </a>
-                                </div>
-                                <a href="#">
-                                    <img src="~/Content/images/upcoming-event-1.jpg" alt="image">
+
+<section class="section-upcoming-events">
+    <div class="container">
+        <div class="">
+            <div class="section-header">
+                <h2>Featured Tickets</h2>
+
+            </div>
+            <div class="section-content">
+                <ul class="clearfix">
+                    @foreach (var ticket in ViewBag.Features)
+                    {
+                        <li>
+                            <div class="date">
+                                <a>
+                                    <span class="day">@getDateElement(ticket.Date, 2)</span>
+                                    <span class="month">@getDateElement(ticket.Date, 1)</span>
+                                    <span class="year">@getDateElement(ticket.Date, 0)</span>
                                 </a>
-                                <div class="info">
-                                    <p>BMW Open Championship <span>San Francisco</span></p>
-                                    <a href="#" class="get-ticket">Get Ticket</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="date">
-                                    <a href="#">
-                                        <span class="day">26</span>
-                                        <span class="month">August</span>
-                                        <span class="year">2016</span>
-                                    </a>
-                                </div>
-                                <a href="#">
-                                    <img src="~/Content/images/upcoming-event-2.jpg" alt="image">
-                                </a>
-                                <div class="info">
-                                    <p>Kiai Kanjeng Orchestra <span>San Francisco</span></p>
-                                    <a href="#" class="get-ticket">Get Ticket</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="date">
-                                    <a href="#">
-                                        <span class="day">27</span>
-                                        <span class="month">August</span>
-                                        <span class="year">2016</span>
-                                    </a>
-                                </div>
-                                <a href="#">
-                                    <img src="~/Content/images/upcoming-event-3.jpg" alt="image">
-                                </a>
-                                <div class="info">
-                                    <p>Envato Author SF Meetup <span>San Francisco</span></p>
-                                    <a href="#" class="get-ticket">Get Ticket</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                            </div>
+                            <a>
+                                <img src="@ticket.Category.Photo" alt="image">
+                            </a>
+                            <div class="info">
+                               <p>@ticket.Name <span>@ticket.Location</span></p>
+                                <a href="/Search/Detail/@ticket.Id" class="get-ticket">Get Ticket</a>
+                            </div>
+                        </li>
+                    }
+                  
+                </ul>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <section class="section-event-category">
-            <div class="container">
-                <div class="row">
-                    <div class="section-header">
-                        <h2>Event by Categories</h2>
-                    </div>
-                    <div class="section-content">
-                        <ul class="row clearfix">
-                            <li class="category-1 col-sm-4">
-                                <img src="~/Content/images/back-img/11.jpg" alt="image">
-                                <a href="#"><span>Concerts</span></a>
-                            </li>
-                            <li class="category-2 col-sm-4">
-                                <img src="~/Content/images/back-img/12.jpg" alt="image">
-                                <a href="#"><span>Sports</span></a>
-                            </li>
-                            <li class="category-3 col-sm-4">
-                                <img src="~/Content/images/back-img/13.jpg" alt="image">
-                                <a href="#"><span>Threaters</span></a>
-                            </li>
-                            <li class="category-4 col-sm-4">
-                                <img src="~/Content/images/back-img/14.jpg" alt="image">
-                                <a href="#"><span>Parties</span></a>
-                            </li>
-                            <li class="category-5 col-sm-4">
-                                <img src="~/Content/images/back-img/15.jpg" alt="image">
-                                <a href="#"><span>Communities</span></a>
-                            </li>
-                            <li class="category-6 col-sm-4">
-                                <img src="~/Content/images/back-img/16.jpg" alt="image">
-                                <a href="#"><span>Classes</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<section class="section-event-category">
+    <div class="container">
+        <div class="">
+            <div class="section-header">
+                <h2>Event by Categories</h2>
             </div>
-        </section>
-
-        <section class="section-stats">
-            <div class="container">
-                <div class="row">
-                    <div class="section-content">
-                        <ul class="row clearfix">
-                            <li class="col-sm-4">
-                                <span class="count">598</span>
-                                <hr>
-                                <p>Events Active</p>
-                            </li>
-                            <li class="col-sm-4">
-                                <span class="count">16,173</span>
-                                <hr>
-                                <p>Active User</p>
-                            </li>
-                            <li class="col-sm-4">
-                                <span class="count">136,874</span>
-                                <hr>
-                                <p>Ticket Sold</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="section-content">
+                <ul class="row clearfix">
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <li class="category-1 col-sm-4">
+                            <img src="@category.Photo" alt="image">
+                            <a href="/Search?category=@category.Id"><span>@category.Name</span></a>
+                        </li>
+                    }
+                </ul>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-
-        <section class="section-newsletter">
-            <div class="container">
-                <div class="section-content">
-                    <h2>Stay Up to date With Your Favorite Events!</h2>
-                     <div class="newsletter-form clearfix">
-                        <input type="email" placeholder="Your Email Address">
-                        <input type="submit" value="Subscribe">
-                    </div>
-                </div>
+<section class="section-stats">
+    <div class="container">
+        <div class="">
+            <div class="section-content">
+                <ul class="row clearfix">
+                    <li class="col-sm-4">
+                        <span class="count">@ViewBag.ActiveEvents</span>
+                        <hr>
+                        <p>Events Active</p>
+                    </li>
+                    <li class="col-sm-4">
+                        <span class="count">@ViewBag.ActiveUsers</span>
+                        <hr>
+                        <p>Active User</p>
+                    </li>
+                    <li class="col-sm-4">
+                        <span class="count">@ViewBag.SoldTickets</span>
+                        <hr>
+                        <p>Ticket Sold</p>
+                    </li>
+                </ul>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
+
+<section class="section-newsletter">
+    <div class="container">
+        <div class="section-content">
+            <h2>Stay Up to date With Your Favorite Events!</h2>
+            <div class="newsletter-form clearfix">
+                <form action="/Home/Subscribe" method="post">
+                    <input name="Email" id="subscribe" type="email" placeholder="Your Email Address">
+                    <input id="subscribe_submit" type="submit" value="Subscribe">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts {
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyDnUN54Fs30PEKMg-gxVx_B2xQ8y5LPib8&sensor=false&callback=initMap"></script>
+    <script type="text/javascript">
+        function debounce(func, wait, immediate) {
+            var timeout;
+            return function () {
+                var context = this, args = arguments;
+                var later = function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        };
+        $(document).ready(function () {
+           
+            $('#search_event').keydown(debounce((event) => {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    window.location.href = "/Search?event=" + $('#search_event').val() + "&location=" + $('#address').html();
+                } else {
+                    $.ajax({
+                        method: 'get',
+                        url: '/api/TicketNameSearch?name=' + $('#search_event').val(),
+                        beforeSend: function () {
+                            console.log('ajax start');
+                            $('.lds-spinner').show();
+                        },
+                        success: function (response) {
+                            console.log('ajax finish');
+                            let content = '';
+                            console.log(response);
+                            if (response.length > 0) {
+                                for (var item of response) {
+                                    content += '<div class="search-result-item2" data-id="' + item.Id + '">\
+                                            <div class="search-result2-name">' + item.Name + '</div>\
+                                            <div class="search-result2-detail">' + item.Date + ' - ' + item.Location + '</div>\
+                                        </div> ';
+                                }
+                            }
+                            $("#search_results").html(content);
+                            $('#search_results').hide();
+                            $('#search_results').slideDown("fast", function () { });
+                            $('.select-location').hide();
+                            $(".search-result-item2").click(function(e) {                                
+                                window.location.href = "/Search/Detail/" + $(e.currentTarget).data('id');
+                            })
+                            $("#search_event").focusout(function (e) {
+                                setTimeout(function () { $('#search_results').hide(); }, 500);
+                            })
+                          
+                            $('.lds-spinner').hide();
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    })
+                }
+                event.stopPropagation();
+            }, 500))
+            
+            $("#search_event").focus(function () {
+                $('#search_results').hide();
+                $('#search_results').slideDown("fast", function () { });
+                $('.select-location').hide();
+            })
+            /*
+            $('#subscribe_submit').click(function () {
+                $.ajax({
+                    method: 'post',
+                    url: '/Home/Subscribe',
+                    data: {
+                        'subscribe': $('#subscribe').val()
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $('#subscribe').val('');
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                })
+            });*/
+            if ($("#modal_type").val() == "login") {
+                $("#login-modal").modal();
+                if ($('#modal_message').val()) {
+                    $("#login-form > .modal-body").append('<div class="login-alert">' + $('#modal_message').val() + '</div>')
+                }
+            }
+            if ($("#modal_type").val() == "confirm") {
+                $("#confirm-modal").modal();
+            }
+            if ($("#modal_type").val() == "reset") {
+                $("#reset-modal").modal();
+            }
+            if ($("#modal_type").val() == "success") {
+                $('#success-modal-text').html($('#modal_message').val());
+                $("#success-modal").modal();
+            }
+            $('#change_location').click(function (e) {
+                $('.select-location').slideDown("fast", function () { })
+                $('.location').click(function (e) {
+                    $('.select-location').hide();
+                    $('#address').html($(e.currentTarget).html())
+                })
+            })
+
+            $.ajax({
+                method: 'get',
+                url: 'https://api.muctool.de/whois',
+                success: function (response) {
+                    console.log(response);
+                    $('#address').html(response.city);
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        });
+    </script>
+}
