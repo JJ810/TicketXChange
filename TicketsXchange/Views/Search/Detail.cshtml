@@ -6,6 +6,9 @@
     var price = (float)Model.Price;
 }
 
+<input type="hidden" id="modal_type" value="@ViewBag.modal" />
+<input type="hidden" id="modal_message" value="@ViewBag.message" />
+
 <section class="section-event-single-featured-header" style="background-image:url(@Model.Category.Photo)">
     <div class="container">
         <div class="section-content">
@@ -29,7 +32,7 @@
             <li>
                 <span>£ @price</span>
             </li>
-            @if(Model.Balance != 0 && Model.PaymentMethod == 0)
+            @if (Model.Balance != 0 && Model.PaymentMethod == 0)
             {
                 <li>
                     <a href="/Search/Order/@Model.Id">Purchase Ticket</a>
@@ -148,15 +151,13 @@
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            localStorage.setItem("UserID", $(".user-id").val())
-            $('#search_date').data('datepicker')
-            Filter(0);
-            $('#search_button').click((e) => {
-                Filter(0);
-            })
-            $('#search_sort').change((e) => {
-                Filter(0);
-            })
+
+            if ($("#modal_type").val() == "login") {
+                $("#login-modal").modal();
+                if ($('#modal_message').val()) {
+                    $("#login-form > .modal-body").append('<div class="login-alert">' + $('#modal_message').val() + '</div>')
+                }
+            }
         });
     </script>
 }

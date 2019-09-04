@@ -12,12 +12,13 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Newtonsoft.Json;
+using TicketsXchange.DTO;
 using TicketsXchange.Models;
 using TicketsXchange.ViewModel;
 
 namespace TicketsXchange.Controllers
 {
-    public class TicketController : ApiController
+    public class TicketApiController : ApiController
     {
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
@@ -49,7 +50,7 @@ namespace TicketsXchange.Controllers
             request.Location = makeLower(request.Location);
             request.Name = makeLower(request.Name);
             request.Date = makeLower(request.Date);
-            List<SearchTicket> list = new List<SearchTicket>();
+            List<SearchTicketDTO> list = new List<SearchTicketDTO>();
             IQueryable<Ticket> result;
             int totalRows = db.Tickets.Where(c => c.Price > request.MinPrice && c.Price < request.MaxPrice
                 && request.Categories.Contains((int)c.CategoryId) && c.Location.ToLower().Contains(request.Location)
@@ -68,7 +69,7 @@ namespace TicketsXchange.Controllers
             }
             foreach (var ticket in result)
             {
-                SearchTicket item = new SearchTicket();
+                SearchTicketDTO item = new SearchTicketDTO();
                 item.Id = ticket.Id;
                 item.Name = ticket.Name;
                 item.Location = ticket.Location;
@@ -212,7 +213,7 @@ namespace TicketsXchange.Controllers
         }
         
         [System.Web.Http.Route("api/Ticket/Admin")]
-        public IHttpActionResult Admin([FromBody] AdminTicket request)
+        public IHttpActionResult Admin([FromBody] TicketDTO request)
         {
             var query = Request.GetQueryNameValuePairs();
             string action = "list";
@@ -223,12 +224,12 @@ namespace TicketsXchange.Controllers
                 if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
                 if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
             }
-            List<AdminTicket> list = new List<AdminTicket>();
+            List<TicketDTO> list = new List<TicketDTO>();
             if (action == "list")
             {
                 foreach (var ticket in db.Tickets.OrderBy(a => a.Id).Skip(start).Take(page))
                 {
-                    AdminTicket item = new AdminTicket();
+                    TicketDTO item = new TicketDTO();
                     item.Id = ticket.Id;
                     item.CategoryId = (int)ticket.CategoryId;
                     item.Name = ticket.Name;
@@ -303,19 +304,15 @@ namespace TicketsXchange.Controllers
             }
             return Json(1);
         }
-        public class DataType
-        {
-            public string DisplayText { get; set; }
-            public int Value { get; set; }
-        }
+   
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/TicketName/GetJson")]
         public IHttpActionResult GetJson()
         {
-            List<DataType> list = new List<DataType>();
+            List<JsonDataDTO> list = new List<JsonDataDTO>();
             foreach (var ev in db.Tickets)
             {
-                DataType data = new DataType();
+                JsonDataDTO data = new JsonDataDTO();
                 data.DisplayText = ev.Name;
                 data.Value = ev.Id;
                 list.Add(data);

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TicketsXchange.ViewModel
 {
-    public class SearchTicket
+    public class SearchTicketDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

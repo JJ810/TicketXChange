@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Newtonsoft.Json;
+using TicketsXchange.DTO;
 using TicketsXchange.Models;
 using TicketsXchange.ViewModel;
 
@@ -22,17 +23,9 @@ namespace TicketsXchange.Controllers
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
 
-        public class AdminPayment
-        {
-            public int Id { get; set; }
-            public int TicketId { get; set; }
-            public int Quantity { get; set; }
-            public float TotalPrice { get; set; }
-            public int PaymentMethod { get; set; }
-            public string CreatedAt { get; set; }
-        }
+        
         [System.Web.Http.Route("api/Payment/Admin")]
-        public IHttpActionResult Admin([FromBody] AdminPayment request)
+        public IHttpActionResult Admin([FromBody] PaymentDTO request)
         {
             var query = Request.GetQueryNameValuePairs();
             string action = "list";
@@ -43,12 +36,12 @@ namespace TicketsXchange.Controllers
                 if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
                 if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
             }
-            List<AdminPayment> list = new List<AdminPayment>();
+            List<PaymentDTO> list = new List<PaymentDTO>();
             if (action == "list")
             {
                 foreach (var payment in db.Payments.OrderBy(a => a.Id).Skip(start).Take(page))
                 {
-                    AdminPayment item = new AdminPayment();
+                    PaymentDTO item = new PaymentDTO();
                     item.Id = payment.Id;
                     item.TicketId = (int)payment.TicketId;
                     item.Quantity = payment.Quantity;

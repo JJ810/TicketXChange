@@ -53,7 +53,8 @@ namespace TicketsXchange.Controllers
         {
             var password = request.Password;
             User user = db.Users.Where(a => a.Email == request.Email).FirstOrDefault();
-            string modal, message;
+            string modal = "", message = "";
+            
             if (user == null)
             {
                 modal = "login";
@@ -71,15 +72,19 @@ namespace TicketsXchange.Controllers
                     if (PasswordHelper.verifyMd5Hash(request.Password, user.Password))
                     {
                         Session["UserID"] = user.Id;
-                        if (request.Role == 1)
-                        {
-                            return Redirect(string.Format("~/Profile/Edit/{0}", user.Id));
-                        }
-                        else
+                        if (user.Role == 0)
                         {
                             return RedirectToAction("Index", "Admin");
                         }
-                        
+                        else
+                        {
+                            var controller = (Request.UrlReferrer.Segments.Skip(1).Take(1).SingleOrDefault() ?? "Home").Trim('/');
+                            var action = (Request.UrlReferrer.Segments.Skip(2).Take(1).SingleOrDefault() ?? "Index").Trim('/');
+                            if (controller == "Search" && action == "Detail") {
+                                var ticketId = (Request.UrlReferrer.Segments.Skip(3).Take(1).SingleOrDefault()).Trim('/');
+                                return RedirectToAction("Order", "Search", new { id=ticketId });
+                            }                          
+                        }                        
                     }
                     else
                     {
@@ -88,7 +93,7 @@ namespace TicketsXchange.Controllers
                     }
                 }                
             }
-
+           
             return RedirectToAction("Index", "Home", new { modal = modal, message = message});
         }
 

@@ -34,7 +34,7 @@ namespace TicketsXchange.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public ActionResult Add([FromBody] SellForm request)
+        public ActionResult Add([FromBody] SellFormDTO request)
         {
             Ticket ticket = new Ticket
             {

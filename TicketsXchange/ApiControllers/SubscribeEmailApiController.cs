@@ -8,11 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using TicketsXchange.DTO;
 using TicketsXchange.Models;
 
 namespace TicketsXchange.Controllers
 {
-    public class SubscribeEmailController : ApiController
+    public class SubscribeEmailApiController : ApiController
     {
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
@@ -114,14 +115,9 @@ namespace TicketsXchange.Controllers
         {
             return db.SubscribeEmails.Count(e => e.Id == id) > 0;
         }
-        public class SubscribeMailAdmin
-        {
-            public int Id { get; set; }
-            public string Email { get; set; }
-            public string CreatedAt { get; set; }
-        }
+
         [System.Web.Http.Route("api/Subscribe/Admin")]
-        public IHttpActionResult Admin([FromBody] SubscribeMailAdmin request)
+        public IHttpActionResult Admin([FromBody] SubscribeMailDTO request)
         {
             var query = Request.GetQueryNameValuePairs();
             string action = "list";
@@ -132,12 +128,12 @@ namespace TicketsXchange.Controllers
                 if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
                 if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
             }
-            List<SubscribeMailAdmin> list = new List<SubscribeMailAdmin>();
+            List<SubscribeMailDTO> list = new List<SubscribeMailDTO>();
             if (action == "list")
             {
                 foreach (var mail in db.SubscribeEmails.OrderBy(a => a.Id).Skip(start).Take(page))
                 {
-                    SubscribeMailAdmin item = new SubscribeMailAdmin();
+                    SubscribeMailDTO item = new SubscribeMailDTO();
                     item.Id = mail.Id;
                     item.Email = mail.Email;
                     item.CreatedAt = String.Format("{0:dd/MM/yyyy}", mail.CreatedAt);

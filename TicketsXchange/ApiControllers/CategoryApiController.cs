@@ -12,10 +12,11 @@ using TicketsXchange.Helper;
 using System.Web.Security;
 using System.Web;
 using TicketsXchange.Models;
+using TicketsXchange.DTO;
 
 namespace TicketsXchange.Controllers
 {
-    public class CategoryController : ApiController
+    public class CategoryApiController : ApiController
     {
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
@@ -132,12 +133,7 @@ namespace TicketsXchange.Controllers
         {
             return db.Categories.Count(e => e.Id == id) > 0;
         }
-        public class AdminCategory
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public string Photo { get; set; }
-        }
+     
         [System.Web.Http.Route("api/Category/Admin")]
         public IHttpActionResult Admin([FromBody] Category request)
         {
@@ -150,12 +146,12 @@ namespace TicketsXchange.Controllers
                 if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
                 if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
             }
-            List<AdminCategory> list = new List<AdminCategory>();
+            List<CategoryDTO> list = new List<CategoryDTO>();
             if (action == "list")
             {
                 foreach(var category in db.Categories.OrderBy(a => a.Id).Skip(start).Take(page))
                 {
-                    AdminCategory item = new AdminCategory();
+                    CategoryDTO item = new CategoryDTO();
                     item.Id = category.Id;
                     item.Name = category.Name;
                     item.Photo = category.Photo;
@@ -199,19 +195,15 @@ namespace TicketsXchange.Controllers
             }
             return Json(1);
         }
-        public class DataType
-        {
-            public string DisplayText { get; set; }
-            public int Value { get; set; }
-        }
+
         [HttpPost]
         [System.Web.Http.Route("api/Category/GetJson")]
         public IHttpActionResult GetJson()
         {
-            List<DataType> list = new List<DataType>();
+            List<JsonDataDTO> list = new List<JsonDataDTO>();
             foreach(var category in db.Categories)
             {
-                DataType data = new DataType();
+                JsonDataDTO data = new JsonDataDTO();
                 data.DisplayText = category.Name;
                 data.Value = category.Id;
                 list.Add(data);

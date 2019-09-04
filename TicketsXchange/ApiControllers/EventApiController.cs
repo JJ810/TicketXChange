@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using TicketsXchange.DTO;
 using TicketsXchange.Models;
 
 namespace TicketsXchange.Controllers
@@ -204,19 +205,15 @@ namespace TicketsXchange.Controllers
 
             return Json(1);
         }
-        public class DataType
-        {
-            public string DisplayText { get; set; }
-            public int Value { get; set; }
-        }
+       
         [HttpPost]
         [System.Web.Http.Route("api/Event/GetJson")]
         public IHttpActionResult GetJson()
         {
-            List<DataType> list = new List<DataType>();
+            List<JsonDataDTO> list = new List<JsonDataDTO>();
             foreach (var ev in db.Events)
             {
-                DataType data = new DataType();
+                JsonDataDTO data = new JsonDataDTO();
                 data.DisplayText = ev.Name;
                 data.Value = ev.Id;
                 list.Add(data);

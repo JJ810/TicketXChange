@@ -21,12 +21,12 @@ namespace TicketsXchange.Controllers
             ViewBag.Event = Request.QueryString["event"];
             ViewBag.Category = Request.QueryString["category"];
             ViewBag.Location = Request.QueryString["location"];
-
             return View();
         }
        
-        public ActionResult Detail(int? id)
+        public ActionResult Detail(int? id, string modal)
         {
+            ViewBag.modal = modal;
             Ticket ticket = db.Tickets.Find(id);
             if (ticket == null)
             {
@@ -49,7 +49,7 @@ namespace TicketsXchange.Controllers
             else
             {
                 ViewBag.modal = "login";
-                return RedirectToAction("Index", "Home", new { modal = "login" });
+                return RedirectToAction("Detail", "Search", new {id=id, modal = "login" });
             }
            
         }

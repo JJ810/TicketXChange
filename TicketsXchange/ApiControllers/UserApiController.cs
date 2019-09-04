@@ -16,10 +16,11 @@ using System.Net.Mail;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
+using TicketsXchange.DTO;
 
 namespace TicketsXchange.Controllers
 {
-    public class UserController : ApiController
+    public class UserApiController : ApiController
     {
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
@@ -192,28 +193,8 @@ namespace TicketsXchange.Controllers
         {
             return db.Users.Count(e => e.Id == id) > 0;
         }
-        public class AdminUser
-        {
-            public int Id { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string Email { get; set; }
-            public int Sex { get; set; }
-            public string DOB { get; set; }
-            public int Verified { get; set; }
-            public int Active { get; set; }
-            public string MobileNumber { get; set; }
-            public string PhoneNumber { get; set; }
-            public string AddressLine1 { get; set; }
-            public string AddressLine2 { get; set; }
-            public string AddressLine3 { get; set; }
-            public string PostCode { get; set; }
-            public string City { get; set; }
-            public string State { get; set; }
-            public string Country { get; set; }
-            public string CreatedAt { get; set; }
-        }
-        public IHttpActionResult Admin([FromBody] AdminUser request)
+        
+        public IHttpActionResult Admin([FromBody] UserDTO request)
         {
             var query = Request.GetQueryNameValuePairs();
             string action = "list";
@@ -224,12 +205,12 @@ namespace TicketsXchange.Controllers
                 if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
                 if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
             }
-            List<AdminUser> list = new List<AdminUser>();
+            List<UserDTO> list = new List<UserDTO>();
             if (action == "list")
             {               
                 foreach (var user in db.Users.OrderBy(a=>a.Id).Skip(start).Take(page))
                 {
-                    AdminUser item = new AdminUser();
+                    UserDTO item = new UserDTO();
                     item.Id = user.Id;
                     item.FirstName = user.Profile.FirstName;
                     item.LastName = user.Profile.LastName;
@@ -322,19 +303,15 @@ namespace TicketsXchange.Controllers
             }
             return Json(1);
         }
-        public class DataType
-        {
-            public string DisplayText { get; set; }
-            public int Value { get; set; }
-        }
+     
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/UserName/GetJson")]
         public IHttpActionResult GetJson()
         {
-            List<DataType> list = new List<DataType>();
+            List<JsonDataDTO> list = new List<JsonDataDTO>();
             foreach (var ev in db.Users)
             {
-                DataType data = new DataType();
+                JsonDataDTO data = new JsonDataDTO();
                 data.DisplayText = ev.Profile.FirstName + " " + ev.Profile.LastName;
                 data.Value = ev.Id;
                 list.Add(data);
