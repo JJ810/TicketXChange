@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="TicketsXchangeModel.Event" Width="1.5" PointX="0.5" PointY="7.125" />
         <EntityTypeShape EntityType="TicketsXchangeModel.Payment" Width="1.5" PointX="5.25" PointY="16.375" />
         <EntityTypeShape EntityType="TicketsXchangeModel.Profile" Width="1.5" PointX="0.75" PointY="14.25" />
-        <EntityTypeShape EntityType="TicketsXchangeModel.Sell" Width="1.5" PointX="2.875" PointY="15.25" />
+        <EntityTypeShape EntityType="TicketsXchangeModel.Sell" Width="1.5" PointX="2.625" PointY="15" />
         <EntityTypeShape EntityType="TicketsXchangeModel.SubscribeEmail" Width="1.5" PointX="6" PointY="7.375" />
         <EntityTypeShape EntityType="TicketsXchangeModel.SubscribeLog" Width="1.5" PointX="5.875" PointY="10.875" />
         <EntityTypeShape EntityType="TicketsXchangeModel.Ticket" Width="1.5" PointX="3" PointY="9.5" />

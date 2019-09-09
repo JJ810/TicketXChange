@@ -207,8 +207,12 @@
     <Compile Include="ApiControllers\TicketApiController.cs" />
     <Compile Include="ApiControllers\UserApiController.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
+    <Compile Include="DTO\EventDTO.cs" />
     <Compile Include="DTO\JsonDataDTO.cs" />
     <Compile Include="DTO\PaymentDTO.cs" />
+    <Compile Include="DTO\PayModelDTO.cs" />
+    <Compile Include="DTO\RegisterUserDTO.cs" />
+    <Compile Include="DTO\ResetFormDTO.cs" />
     <Compile Include="DTO\SubscribeMailDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Global.asax.cs">

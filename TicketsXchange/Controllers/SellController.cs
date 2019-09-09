@@ -27,12 +27,13 @@ namespace TicketsXchange.Controllers
                 return RedirectToAction("Index", "Home", new { modal="login"});
             }            
         }
+        //Upload Photo page
         public ActionResult Photo(int? id)
         {
             ViewBag.CategoryId = id;
             return View();
         }
-
+        //Method for add tickets when user submit a ticket.
         [System.Web.Http.HttpPost]
         public ActionResult Add([FromBody] SellFormDTO request)
         {
@@ -55,6 +56,7 @@ namespace TicketsXchange.Controllers
             db.SaveChanges();
             return RedirectToAction("Detail", "Search", new {ticket.Id});
         }
+        //Submit page
         public ActionResult Submit(int? id)
         {
             ViewBag.CategoryId = id;

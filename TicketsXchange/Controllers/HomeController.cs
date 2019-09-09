@@ -21,6 +21,7 @@ using TicketsXchange.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
+using TicketsXchange.DTO;
 
 namespace TicketsXchange.Controllers
 {
@@ -136,12 +137,8 @@ namespace TicketsXchange.Controllers
             return RedirectToAction("Index");
         }
  
-        public class ResetForm
-        {
-            public int Id { get; set; }
-            public string Password { get; set; }
-        }
-        public ActionResult ResetPassword([FromBody] ResetForm request)
+        
+        public ActionResult ResetPassword([FromBody] ResetFormDTO request)
         {
             var password = request.Password;
             User user = db.Users.Where(a => a.Id == request.Id).FirstOrDefault();

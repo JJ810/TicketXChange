@@ -21,7 +21,6 @@ namespace TicketsXchange.Controllers
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
         // GET: api/Category
-
         public IQueryable<Category> GetCategory()
         {
             return db.Categories;
@@ -133,13 +132,14 @@ namespace TicketsXchange.Controllers
         {
             return db.Categories.Count(e => e.Id == id) > 0;
         }
-     
+        //CRUD for Category page table in admin page.
         [System.Web.Http.Route("api/Category/Admin")]
         public IHttpActionResult Admin([FromBody] Category request)
         {
             var query = Request.GetQueryNameValuePairs();
             string action = "list";
             int start = 0, page = 0;
+            //Get parameters from the request
             foreach (var param in Request.GetQueryNameValuePairs())
             {
                 if (param.Key == "action") action = param.Value;
@@ -148,7 +148,7 @@ namespace TicketsXchange.Controllers
             }
             List<CategoryDTO> list = new List<CategoryDTO>();
             if (action == "list")
-            {
+            {   //list
                 foreach(var category in db.Categories.OrderBy(a => a.Id).Skip(start).Take(page))
                 {
                     CategoryDTO item = new CategoryDTO();
@@ -164,7 +164,7 @@ namespace TicketsXchange.Controllers
                 return Json(res);
             }
             else if (action == "update")
-            {
+            {   //update
                 Category category = db.Categories.Find(request.Id);
                 category.Name = request.Name;
                
@@ -174,7 +174,7 @@ namespace TicketsXchange.Controllers
                 return Json(res);
             }
             else if (action == "delete")
-            {
+            {//delete
                 db.Categories.Remove(db.Categories.Find(request.Id));
                 db.SaveChanges();
                 Dictionary<string, Object> res = new Dictionary<string, Object>();
@@ -182,7 +182,7 @@ namespace TicketsXchange.Controllers
                 return Json(res);
             }
             else if (action == "create")
-            {
+            {//create
                 Category category = new Category();
                 category.Name = request.Name;
                 db.Categories.Add(category);
@@ -195,7 +195,7 @@ namespace TicketsXchange.Controllers
             }
             return Json(1);
         }
-
+        //For getting category json values for admin page
         [HttpPost]
         [System.Web.Http.Route("api/Category/GetJson")]
         public IHttpActionResult GetJson()
@@ -213,6 +213,7 @@ namespace TicketsXchange.Controllers
             res.Add("Options", list);
             return Json(res);
         }
+        //This method is used for the name search in the sell page
         [HttpGet]
         [Route("api/CategorySearch")]
         public IQueryable<Category> NameSearch([FromUri]String name)

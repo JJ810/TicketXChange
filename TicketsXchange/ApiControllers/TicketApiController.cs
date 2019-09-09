@@ -211,18 +211,19 @@ namespace TicketsXchange.Controllers
         {
             return db.Tickets.Count(e => e.Id == id) > 0;
         }
-        
+        //CRUD for tickets page of admin
         [System.Web.Http.Route("api/Ticket/Admin")]
         public IHttpActionResult Admin([FromBody] TicketDTO request)
         {
             var query = Request.GetQueryNameValuePairs();
             string action = "list";
             int start = 0, page = 0;
+            //Get parameters from request
             foreach (var param in Request.GetQueryNameValuePairs())
             {
-                if (param.Key == "action") action = param.Value;
-                if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
-                if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
+                if (param.Key == "action") action = param.Value;    //action name
+                if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);  //starting index point
+                if (param.Key == "jtPageSize") page = Int32.Parse(param.Value); //page size
             }
             List<TicketDTO> list = new List<TicketDTO>();
             if (action == "list")
@@ -304,7 +305,7 @@ namespace TicketsXchange.Controllers
             }
             return Json(1);
         }
-   
+        //Get Ticket Json Values for admin page
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/TicketName/GetJson")]
         public IHttpActionResult GetJson()

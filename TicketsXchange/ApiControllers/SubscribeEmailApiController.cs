@@ -115,7 +115,7 @@ namespace TicketsXchange.Controllers
         {
             return db.SubscribeEmails.Count(e => e.Id == id) > 0;
         }
-
+        //CRUD for Subcribe page of admin
         [System.Web.Http.Route("api/Subscribe/Admin")]
         public IHttpActionResult Admin([FromBody] SubscribeMailDTO request)
         {

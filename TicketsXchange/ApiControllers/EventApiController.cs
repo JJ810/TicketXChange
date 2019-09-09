@@ -17,15 +17,15 @@ namespace TicketsXchange.Controllers
     {
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
-        // GET: api/SellApi
-        public IQueryable<Event> GetSells()
+        // GET: api/Events
+        public IQueryable<Event> GetEvent()
         {
             return db.Events;
         }
 
-        // GET: api/SellApi/5
+        // GET: api/Event/5
         [ResponseType(typeof(Event))]
-        public IHttpActionResult GetSell(int id)
+        public IHttpActionResult GetEvent(int id)
         {
             Event sell = db.Events.Find(id);
             if (sell == null)
@@ -36,9 +36,9 @@ namespace TicketsXchange.Controllers
             return Ok(sell);
         }
 
-        // PUT: api/SellApi/5
+        // PUT: api/Event/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSell(int id, Event sell)
+        public IHttpActionResult PutEvent(int id, Event sell)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace TicketsXchange.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SellExists(id))
+                if (!EventExists(id))
                 {
                     return NotFound();
                 }
@@ -71,9 +71,9 @@ namespace TicketsXchange.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/SellApi
+        // POST: api/Event
         [ResponseType(typeof(Event))]
-        public IHttpActionResult PostSell(Event sell)
+        public IHttpActionResult PostEvent(Event sell)
         {
             if (!ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace TicketsXchange.Controllers
             }
             catch (DbUpdateException)
             {
-                if (SellExists(sell.Id))
+                if (EventExists(sell.Id))
                 {
                     return Conflict();
                 }
@@ -101,9 +101,9 @@ namespace TicketsXchange.Controllers
             return CreatedAtRoute("DefaultApi", new { id = sell.Id }, sell);
         }
 
-        // DELETE: api/SellApi/5
+        // DELETE: api/Event/5
         [ResponseType(typeof(Event))]
-        public IHttpActionResult DeleteSell(int id)
+        public IHttpActionResult DeleteEvent(int id)
         {
             Event sell = db.Events.Find(id);
             if (sell == null)
@@ -126,36 +126,30 @@ namespace TicketsXchange.Controllers
             base.Dispose(disposing);
         }
 
-        private bool SellExists(int id)
+        private bool EventExists(int id)
         {
             return db.Events.Count(e => e.Id == id) > 0;
         }
-        public class AdminEvent
-        {
-            public int Id { get; set; }
-            public int CategoryId { get; set; }
-            public string Name { get; set; }
-            public string Details { get; set; }
-            public string CreatedAt { get; set; }
-        }
+        //Method for CRUD in Events page of admin
         [System.Web.Http.Route("api/Event/Admin")]
-        public IHttpActionResult Admin([FromBody] AdminEvent request)
+        public IHttpActionResult Admin([FromBody] EventDTO request)
         {
             var query = Request.GetQueryNameValuePairs();
             string action = "list";
             int start = 0, page = 0;
+            //Get parameters from request
             foreach (var param in Request.GetQueryNameValuePairs())
             {
                 if (param.Key == "action") action = param.Value;
                 if (param.Key == "jtStartIndex") start = Int32.Parse(param.Value);
                 if (param.Key == "jtPageSize") page = Int32.Parse(param.Value);
             }
-            List<AdminEvent> list = new List<AdminEvent>();
+            List<EventDTO> list = new List<EventDTO>();
             if (action == "list")
-            {
+            {// list
                 foreach (var ev in db.Events.OrderBy(a => a.Id).Skip(start).Take(page))
                 {
-                    AdminEvent item = new AdminEvent();
+                    EventDTO item = new EventDTO();
                     item.Id = ev.Id;
                     item.CategoryId = (int)ev.CategoryId;
                     item.Name = ev.Name;
@@ -169,7 +163,7 @@ namespace TicketsXchange.Controllers
                 res.Add("TotalRecordCount", db.Events.Count());
                 return Json(res);
             } else if (action == "delete")
-            {
+            {// delete
                 db.Events.Remove(db.Events.Find(request.Id));
                 db.SaveChanges();
                 Dictionary<string, Object> res = new Dictionary<string, Object>();
@@ -177,7 +171,7 @@ namespace TicketsXchange.Controllers
                 return Json(res);
             }
             else if (action == "update")
-            {
+            {//update
                 Event item = db.Events.Find(request.Id);
                 item.CategoryId = request.CategoryId;
                 item.Name = request.Name;
@@ -188,7 +182,7 @@ namespace TicketsXchange.Controllers
                 return Json(res);
             }
             else if (action == "create")
-            {
+            {//create
                 Event item = new Event();
                 item.CategoryId = request.CategoryId;
                 item.Name = request.Name;
@@ -205,7 +199,7 @@ namespace TicketsXchange.Controllers
 
             return Json(1);
         }
-       
+        //Get Events json values for admin apge
         [HttpPost]
         [System.Web.Http.Route("api/Event/GetJson")]
         public IHttpActionResult GetJson()
@@ -223,6 +217,7 @@ namespace TicketsXchange.Controllers
             res.Add("Options", list);
             return Json(res);
         }
+        //This method is used for name search in home page
         [HttpGet]
         [Route("api/EventNameSearch")]
         public IQueryable<Event> NameSearch([FromUri]String name)

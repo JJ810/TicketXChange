@@ -23,7 +23,7 @@ namespace TicketsXchange.Controllers
         private TicketsXchangeEntities db = new TicketsXchangeEntities();
 
 
-        
+        //CRUD for payments page of admin
         [System.Web.Http.Route("api/Payment/Admin")]
         public IHttpActionResult Admin([FromBody] PaymentDTO request)
         {

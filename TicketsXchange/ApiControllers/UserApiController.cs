@@ -78,7 +78,7 @@ namespace TicketsXchange.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-     
+        //Method for user login
         [System.Web.Http.Route("api/login")]
 
         public IHttpActionResult Login([FromBody] User request)
@@ -107,31 +107,24 @@ namespace TicketsXchange.Controllers
             }
             
         }
-        public class RegisterUser
-        {
-            public string Email { get; set; }
-            public string Password { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-        };
-
+        
+        //It is for user registration
         [System.Web.Http.Route("api/register")]
-        public IHttpActionResult Register([FromBody] RegisterUser request)
+        public IHttpActionResult Register([FromBody] RegisterUserDTO request)
         {
-
+            //Check whether the email is already exists
             if (db.Users.Where(a => a.Email == request.Email).FirstOrDefault() != null)
             {
                 return Ok(-3);
             }
             string activationCode = Guid.NewGuid().ToString();
             User user = new User { Email = request.Email, Password = PasswordHelper.getMd5Hash(request.Password), CreatedAt = DateTime.Now, Verified = 0, Role = 1, Active = 0, ActivationCode = activationCode };
-        
-            
+                    
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
+            //if the email is not exists, then add the user
             db.Users.Add(user);
             try
             {
@@ -148,6 +141,7 @@ namespace TicketsXchange.Controllers
                     return Ok(-2);
                 }
             }
+            //Add the profile according to the user
             Profile profile = new Profile { FirstName = request.FirstName, LastName = request.LastName, User
             = user, UserId = user.Id};
             db.Profiles.Add(profile);
@@ -193,7 +187,7 @@ namespace TicketsXchange.Controllers
         {
             return db.Users.Count(e => e.Id == id) > 0;
         }
-        
+        //CRUD for Users page of admin
         public IHttpActionResult Admin([FromBody] UserDTO request)
         {
             var query = Request.GetQueryNameValuePairs();
@@ -303,7 +297,7 @@ namespace TicketsXchange.Controllers
             }
             return Json(1);
         }
-     
+        //Get User Json values 
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/UserName/GetJson")]
         public IHttpActionResult GetJson()

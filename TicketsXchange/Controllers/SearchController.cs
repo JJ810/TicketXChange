@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using TicketsXchange.DTO;
 using TicketsXchange.Models;
 using Worldpay.Sdk;
 using Worldpay.Sdk.Enums;
@@ -23,9 +24,10 @@ namespace TicketsXchange.Controllers
             ViewBag.Location = Request.QueryString["location"];
             return View();
         }
-       
+       //Detail page
         public ActionResult Detail(int? id, string modal)
         {
+            //if the user is not logined, login is modal is popped out.
             ViewBag.modal = modal;
             Ticket ticket = db.Tickets.Find(id);
             if (ticket == null)
@@ -34,6 +36,7 @@ namespace TicketsXchange.Controllers
             }      
             return View(ticket);
         }
+        //Order page
         public ActionResult Order(int? id)
         {
             if (Session["UserID"] as int? > 0)
@@ -47,13 +50,13 @@ namespace TicketsXchange.Controllers
                 return View(ticket);
             }
             else
-            {
+            {   //User is not logined, it takes the user to the search page
                 ViewBag.modal = "login";
                 return RedirectToAction("Detail", "Search", new {id=id, modal = "login" });
             }
            
         }
-     
+        //Review Page
         public ActionResult Review(int? id)
         {
             Ticket ticket = db.Tickets.Find(id);
@@ -67,6 +70,7 @@ namespace TicketsXchange.Controllers
             Session["Payment_Total"] = (float)ticket.Price * Convert.ToInt32(Request.QueryString["amount"]);
             return View(ticket);
         }
+        //Payment Page
         public ActionResult Payment(int? id)
         {
             Ticket ticket = db.Tickets.Find(id);
@@ -76,13 +80,8 @@ namespace TicketsXchange.Controllers
             }
             return View(ticket);
         }
-        public class PayModel
-        {
-            public string Email { get; set; }
-            public string Token { get; set; }
-            public float Total { get; set; }
-        }
-        public ActionResult Pay(PayModel data)
+        //Make payment when user submit the payment
+        public ActionResult Pay(PayModelDTO data)
         {
             WorldpayRestClient restClient = new WorldpayRestClient("https://api.worldpay.com/v1", "T_S_29134e84-936f-4418-8e4e-7a757f307cc6");
 
