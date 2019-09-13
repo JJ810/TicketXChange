@@ -35,7 +35,7 @@
                 </div>
                 <div class="select-location">
                     <div class="location" data-location="london">London</div>
-                    <div class="location" data-location="berlin">Berlin</div>
+                    <div class="location" data-location="berlin">Manchester</div>
                     <div class="location" data-location="paris">Paris</div>
                     <div class="location" data-location="madrid">Madrid</div>
                     <div class="location" data-location="rome">Rome</div>
@@ -44,7 +44,6 @@
         </div>
     </div>
 </section>
-
 
 <section class="section-upcoming-events">
     <div class="container">
@@ -170,7 +169,7 @@
                 } else {
                     $.ajax({
                         method: 'get',
-                        url: '/api/TicketNameSearch?name=' + $('#search_event').val(),
+                        url: '/api/TicketNameSearch?name=' + $('#search_event').val() + '&location=' + $('#address').html(),
                         beforeSend: function () {
                             console.log('ajax start');
                             $('.lds-spinner').show();

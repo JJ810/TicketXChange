@@ -86,14 +86,14 @@ namespace TicketsXchange.Controllers
         }
         [HttpGet]
         [Route("api/TicketNameSearch")]
-        public IQueryable<Ticket> NameSearch([FromUri]String name)
+        public IQueryable<Ticket> NameSearch([FromUri]String name, String location)
         {
             const int ItemsPerPage = 5;
 
             string makeLower(string x) => String.IsNullOrEmpty(x) ? "" : x.ToLower();
             name = makeLower(name);
            
-            return db.Tickets.Where(c =>  c.Name.ToLower().Contains(name)).OrderBy(c => c.Price).Take(ItemsPerPage);
+            return db.Tickets.Where(c => c.Name.ToLower().Contains(name) && c.Location.ToLower().Contains(location)).OrderBy(c => c.Price).Take(ItemsPerPage);
         }
         // GET: api/Ticket/5
         [ResponseType(typeof(Ticket))]
